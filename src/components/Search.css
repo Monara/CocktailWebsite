@@ -1,0 +1,57 @@
+
+.color-container {
+    background-color: var(--blue);
+    width:  100%;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 60%;
+    transform: skewY(12deg);
+    min-height: 55vw;
+}
+
+.search-container {
+    padding-left: 5%;
+    transform: skewY(-12deg); /*unskew*/
+}
+
+.search-title {
+    margin-top: -5%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 5%;
+}
+
+#search-img {
+    width: calc(30px + 5vw);
+    height: auto;
+}
+
+.search {
+    border: 1px solid var(--almostblack);;
+    line-height: 200%;
+    width: 40%;
+    font-family: var(--font2);
+    font-size: 2vw;
+    border-radius: 0; /*iphone shows rounded*/
+  }
+
+  #filter-button { /*remove default styling*/
+    -webkit-appearance: none;
+    border:  none;
+    background: none;
+    cursor: pointer;
+}
+
+label input { /*hide default checkbox*/
+    display: none;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1%;
+}
+
+.filters {
+    padding-top: 2%;
+}

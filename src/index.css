@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Purple+Purse&family=Josefin+Sans&display=swap');
+
+:root {
+  --yellow: rgba(254, 232, 112);
+  --almostblack:  rgba(35, 35, 35, 1);
+  --blue: rgba(160, 218, 244);
+  --green: rgba(185, 232, 112, 1);
+  --font1: 'Fredericka the Great', 'Purple Purse', cursive;
+  --font2: 'Josefin Sans', sans-serif;
+}
+
+body {
+  color: var(--almostblack);
+	padding: 0;
+	margin: 0;
+  font-family: var(--font2);
+  font-size: calc(8px + 1vw);
+} 
+
+h1 {
+  font-family: var(--font1);
+  font-size: calc(8px + 5vw);
+}
+
+h2 {
+  font-family: var(--font1);
+  font-size: calc(8px + 3vw);
+}
+
+button {
+  color: var(--almostblack);
+  font-family: var(--font2);
+  font-size: calc(8px + 1vw);
+}
