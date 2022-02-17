@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Purple+Purse&family=Josefin+Sans&display=swap');
 
 :root {
+  --background: rgb(247, 238, 226);
+  --darkgray: rgb(85, 85, 85);
   --yellow: rgba(254, 232, 112);
   --almostblack:  rgba(35, 35, 35, 1);
   --blue: rgba(160, 218, 244);

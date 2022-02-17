@@ -1,6 +1,7 @@
 import './App.css';
 import Heading from './components/Heading';
 import Search from  './components/Search';
+import SearchResult from './components/SearchResult';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -9,6 +10,8 @@ function App() {
       <Router>
         <Heading />
         <Search />
+        <SearchResult />
+        <SearchResult />
         <Routes>
           <Route path="/" exact />
         </Routes>
