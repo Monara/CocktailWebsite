@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './Search.css';
-import img from "../images/mint.png";
+import img from "../imgs/mint.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';

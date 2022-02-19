@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './SearchResult.css';
-import img from "../images/cocktail-img/73.png";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 function SearchResult(props) {
 
-   let data = props.data; 
+   let data = props.data;
+   var img = "images/cocktail-img/" + data.cocktail_id + ".png";
 
   return (
     <>
