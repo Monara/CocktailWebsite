@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './SearchResult.css';
-import img from "../images/cocktail-img/4.png";
-import { Link } from 'react-router-dom';
+import img from "../images/cocktail-img/73.png";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-function SearchResult() {
+function SearchResult(props) {
+
+   let data = props.data; 
+
   return (
     <>
     <Tabs>
@@ -15,11 +17,9 @@ function SearchResult() {
         <TabPanel>
         <div className='search-result-container'>
             <img src={img} className='search-result-img' alt='' />
-            <div className='result-description'>
-                <h3>Alexandra</h3>
-                <p>30 ml cognac<br />
-                    30 ml creme de cacao (light)<br />
-                    30 ml cream</p>
+            <div className='right-col'>
+                <h3>{data.title}</h3>
+                <p>{data.ingredients}</p>
             </div>
         </div>
         </TabPanel>
@@ -27,13 +27,13 @@ function SearchResult() {
             <div className='search-result-container'>
                 <div className='left-col'>
                     <h3>How to make it</h3>
-                    <p>Shake all ingredients in a shaker with ice. Strain into a glass.</p>
-                    <p>Glass: cocktail</p>
+                    <p>{data.method}</p>
+                    <p>Glass: {data.glass}</p>
                 </div>
-                <div className='right-col'>
+                <div>
                     <h3>Garnish</h3>
-                    <p>Sprinkle cocoa powder on top.</p>
-                    <p>Source: IBA</p>
+                    <p>{data.garnish}</p>
+                    <p>Source: {data.category}</p>
                 </div>
             </div>    
         </TabPanel>

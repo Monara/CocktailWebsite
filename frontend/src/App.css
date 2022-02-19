@@ -1,0 +1,13 @@
+.App {
+    display: flex;
+    flex-direction: column;
+    gap: 10vw;
+    background-color: var(--background);
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    gap: 5vw;
+    padding-bottom: 20vw;
+}
