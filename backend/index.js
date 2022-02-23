@@ -19,9 +19,22 @@ conn.connect(function(err){
 app.get('/search', (req, res) => {
   conn.query("SELECT * FROM cocktail_list", function(error, results) {
       if (error) throw error;
-      res.send(results);
-      
+      res.send(results);  
   });    
+});
+
+app.get('/getTitles', (req, res) => {
+	conn.query("SELECT title FROM cocktail_list", function(error, results) {
+		if (error) throw error;
+		res.send(results.map(item => item.title)); 
+	});
+});
+
+app.get('/getTags', (req, res) => {
+	conn.query("SELECT tag_en FROM cocktail_tags", function(error, results) {
+		if (error) throw error;
+		res.send(results.map(item => item.tag_en)); 
+	});
 });
 
 app.listen(PORT, () => {

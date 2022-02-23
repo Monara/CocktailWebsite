@@ -7,12 +7,19 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
 
-  let [data, setData] = useState(null);
+  let [resultData, setResultData] = useState(null);
+  /*let [autocompleteData, setAutocompleteData] = useState(null);
+
+  useEffect(() => {
+    fetch("/getTitles")
+      .then((res) => res.json())
+      .then((autocompleteData) => setAutocompleteData(autocompleteData));
+  }, []);*/
 
   useEffect(() => {
     fetch("/search")
       .then((res) => res.json())
-      .then((data) => setData(data));
+      .then((resultData) => setResultData(resultData));
   }, []);
 
   return (
@@ -21,7 +28,7 @@ function App() {
         <Heading />
         <Search />
         <div id='results'>
-          {data && data.map((item) => <SearchResult data = {item}/> )}
+          {resultData && resultData.map((item) => <SearchResult data = {item}/> )}
         </div>
         <Routes>
           <Route path="/" exact />

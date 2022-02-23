@@ -1,0 +1,39 @@
+ .search { /*input field styling*/
+  border: 1px solid var(--almostblack);
+  line-height: 180%;
+  font-family: var(--font2);
+  font-size: calc(8px + 1vw);
+  border-radius: 0; /*iphone shows rounded*/
+  padding-left: 1%;
+}
+
+.search:focus {
+  border: 2px solid var(--almostblack);
+  outline: none; /*rid of default blue outline*/
+}
+
+.suggestions {
+  position: absolute;
+  cursor: pointer;
+  background-color: white;
+  padding: 0 2% 0 1%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+ }
+
+ .suggestions ul { 
+  list-style: none;
+  padding-left: 0; /*to remove bullet space*/
+  margin: 0;
+ }
+ 
+ .suggestions li {
+  padding: 5% 0;
+ }
+
+ .non-active {
+  color: var(--darkgray);
+ }
+
+.active{
+  text-decoration: underline;
+}

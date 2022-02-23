@@ -31,7 +31,7 @@
     width: 15%;
   }
 
-ul {
+.menu-dropdown ul {
     font-family: var(--font2);
     font-size: calc(8px + 1.8vw);
     list-style: none;
@@ -39,11 +39,11 @@ ul {
     margin: 0; /*due to absolute position change*/
 }  
 
-li {
+.menu-dropdown li {
     padding: 10%;
 }
 
-li:hover {
+.menu-dropdown li:hover {
     background-color: var(--almostblack);
 }
 

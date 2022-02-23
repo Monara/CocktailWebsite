@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './SearchResult.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 

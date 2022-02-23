@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './Search.css';
 import img from "../imgs/mint.png";
+import Autocomplete from "./Autocomplete";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -28,6 +29,21 @@ const Filters = () =>
     </label>
 </div>;
 
+let [autocompleteTitles, setAutocompleteTitle] = useState(null);
+let [autocompleteTags, setAutocompleteTag] = useState(null);
+
+  useEffect(() => {
+    fetch("/getTitles")
+      .then((res) => res.json())
+      .then((autocompleteTitles) => setAutocompleteTitle(autocompleteTitles));
+  }, []);
+
+  useEffect(() => {
+    fetch("/getTags")
+      .then((resp) => resp.json())
+      .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
+  }, []);
+
   return (
     <>
       <div className='color-container'>
@@ -36,19 +52,18 @@ const Filters = () =>
                 <h2>Find a cocktail</h2>
                 <img src={img} id='search-img' alt='' />
             </div> 
-            <div id="searcharea">
-				<p>By title</p>
-				<input type="text" className="search" />
-				<p>By ingredient</p>
-				<input type="text" className="search" />
-				
-                <div className='filters'>
-                    <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>Filter&nbsp;
-                        {filterVisibility ? <FontAwesomeIcon className='' icon={faChevronUp} /> : <FontAwesomeIcon className='' icon={faChevronDown} />}
-                    </button>
-                    {filterVisibility && <Filters />}
-				</div>
-		    </div>       
+            <div id="search-area">
+              <p>By title</p>
+              <Autocomplete data={autocompleteTitles} />
+              <p>By ingredient</p>
+              <Autocomplete data={autocompleteTags} />
+              <div className='filters'>
+                <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>Filter&nbsp;
+                  {filterVisibility ? <FontAwesomeIcon className='' icon={faChevronUp} /> : <FontAwesomeIcon className='' icon={faChevronDown} />}
+                </button>
+                {filterVisibility && <Filters />}
+              </div>
+		        </div>       
         </div>    
       </div>
     </>
