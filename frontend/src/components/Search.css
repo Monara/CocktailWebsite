@@ -46,3 +46,12 @@ label input { /*hide default checkbox*/
 .filters {
     padding-top: 2%;
 }
+
+#search-button { /*remove default styling*/
+    -webkit-appearance: none;
+    border: none;
+    background: none;
+    background-color: var(--lightblue);
+    padding: 1%;
+    cursor: pointer;
+}

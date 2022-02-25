@@ -7,26 +7,22 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
 
+  let [url, setUrl] = useState('');
   let [resultData, setResultData] = useState(null);
-  /*let [autocompleteData, setAutocompleteData] = useState(null);
 
+  
   useEffect(() => {
-    fetch("/getTitles")
-      .then((res) => res.json())
-      .then((autocompleteData) => setAutocompleteData(autocompleteData));
-  }, []);*/
-
-  useEffect(() => {
-    fetch("/search")
+    fetch(url)
       .then((res) => res.json())
       .then((resultData) => setResultData(resultData));
-  }, []);
+  }, [url]); /*[url] means will run again when updated */
 
   return (
     <div className="App">
       <Router>
         <Heading />
-        <Search />
+        <Search url={url => setUrl(url)}/>
+        <h1>{url}</h1>
         <div id='results'>
           {resultData && resultData.map((item) => <SearchResult data = {item}/> )}
         </div>

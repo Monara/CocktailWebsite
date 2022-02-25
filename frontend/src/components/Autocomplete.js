@@ -5,7 +5,7 @@
 import { useState } from "react";
 import './Autocomplete.css'
 
-const Autocomplete = ({ data }) => {
+const Autocomplete = ({data}) => {
 
     const [suggestions, setSuggestions] = useState([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);

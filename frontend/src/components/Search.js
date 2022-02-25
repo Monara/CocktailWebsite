@@ -7,8 +7,9 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { faSquareCheck } from '@fortawesome/free-regular-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
-function Search() {
+function Search(props) {
 
 const [filterVisibility, setFilterVisibility] = useState(false);
 const [checkbox1Marked, markCheckbox1] = useState(false);
@@ -44,6 +45,19 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
       .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
   }, []);
 
+  function searchClick() {
+
+    let url = new URL("https://example.com/search");
+
+    if (checkbox1Marked == true) {
+      url.searchParams.append('short', 'true');
+    }
+    if (checkbox2Marked == true) {
+      url.searchParams.append('vegan', 'true');
+    }
+    return url.toString().substring(19);
+  }
+
   return (
     <>
       <div className='color-container'>
@@ -59,10 +73,11 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
               <Autocomplete data={autocompleteTags} />
               <div className='filters'>
                 <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>Filter&nbsp;
-                  {filterVisibility ? <FontAwesomeIcon className='' icon={faChevronUp} /> : <FontAwesomeIcon className='' icon={faChevronDown} />}
+                  {filterVisibility ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
                 </button>
                 {filterVisibility && <Filters />}
               </div>
+              <button id='search-button' onClick={() => props.url(searchClick())}>Search <FontAwesomeIcon icon={faMagnifyingGlass} /></button>
 		        </div>       
         </div>    
       </div>
