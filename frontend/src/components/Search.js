@@ -12,8 +12,11 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 function Search(props) {
 
 const [filterVisibility, setFilterVisibility] = useState(false);
+const [titleValue, setTitleValue] = useState("");
+const [tagValue, setTagValue] = useState("");
 const [checkbox1Marked, markCheckbox1] = useState(false);
 const [checkbox2Marked, markCheckbox2] = useState(false);
+
 
 const Filters = () =>
 
@@ -48,6 +51,14 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
   function searchClick() {
 
     let url = new URL("https://example.com/search");
+
+    if (titleValue != "") {
+      url.searchParams.append('cocktail', titleValue);
+    }
+
+    if (tagValue != "") {
+      url.searchParams.append('tag', tagValue);
+    }
 
     if (checkbox1Marked == true) {
       url.searchParams.append('short', 'true');

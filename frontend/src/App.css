@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 10vw;
     background-color: var(--background);
+    /*background-image: url("imgs/confetti.png");*/
 }
 
 #results {

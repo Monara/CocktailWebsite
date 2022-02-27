@@ -22,7 +22,7 @@ function App() {
       <Router>
         <Heading />
         <Search url={url => setUrl(url)}/>
-        <h1>{url}</h1>
+        
         <div id='results'>
           {resultData && resultData.map((item) => <SearchResult data = {item}/> )}
         </div>

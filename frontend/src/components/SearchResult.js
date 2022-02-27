@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './SearchResult.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -6,6 +6,9 @@ function SearchResult(props) {
 
    let data = props.data;
    var img = "images/cocktail-img/" + data.cocktail_id + ".png";
+    var ingredients = data.ingredients.replace(/\n|\r\n/g, "<br>"); /*newlines and carriage returns in database */
+
+    let [garnishVal, setGarnishVal] = useState(data.garnish != null);
 
   return (
     <>
@@ -17,23 +20,20 @@ function SearchResult(props) {
         <TabPanel>
         <div className='search-result-container'>
             <img src={img} className='search-result-img' alt='' />
-            <div className='right-col'>
+            <div className='right-col text'>
                 <h3>{data.title}</h3>
-                <p>{data.ingredients}</p>
+                <p dangerouslySetInnerHTML={{__html: ingredients}} />
             </div>
         </div>
         </TabPanel>
         <TabPanel>
             <div className='search-result-container'>
-                <div className='left-col'>
-                    <h3>How to make it</h3>
+                <div className='text'>
+                    <h3>Instructions</h3>
                     <p>{data.method}</p>
-                    <p>Glass: {data.glass}</p>
-                </div>
-                <div>
-                    <h3>Garnish</h3>
-                    <p>{data.garnish}</p>
-                    <p>Source: {data.category}</p>
+                    {garnishVal && <p>{data.garnish}</p>} 
+                    <p><b>Glass:</b> {data.glass}</p>
+                    <p><b>Source:</b> {data.category}</p>
                 </div>
             </div>    
         </TabPanel>

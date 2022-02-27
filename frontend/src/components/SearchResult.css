@@ -5,19 +5,25 @@
     background-color: white;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
     column-gap: 10%;
     border-radius: 10px 0px 10px 10px;
 }
 
-.left-col {
-    padding-left: 3%;
+.text {
+    padding-left: 5%;
+}
+
+div.text > p { /*to not crowd all paragraphs on search results*/
+    line-height: 150%;
+
 }
 
 .search-result-img {
     width: calc(100px + 5vw);
     height: auto;
+    border-radius: 10px;
 }
 
 .tab-list {
