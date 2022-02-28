@@ -22,9 +22,9 @@ function App() {
       <Router>
         <Heading />
         <Search url={url => setUrl(url)}/>
-        
+        <h1>{url}</h1>
         <div id='results'>
-          {resultData && resultData.map((item) => <SearchResult data = {item}/> )}
+          {resultData && resultData.map((item) => <SearchResult data = {item} key={item.cocktail_id}/> )}
         </div>
         <Routes>
           <Route path="/" exact />
@@ -35,3 +35,4 @@ function App() {
 }
 
 export default App;
+/*unique key to avoid warning*/

@@ -20,7 +20,7 @@ function SearchResult(props) {
         <TabPanel>
         <div className='search-result-container'>
             <img src={img} className='search-result-img' alt='' />
-            <div className='right-col text'>
+            <div className='text'>
                 <h3>{data.title}</h3>
                 <p dangerouslySetInnerHTML={{__html: ingredients}} />
             </div>

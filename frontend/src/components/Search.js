@@ -52,14 +52,12 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
 
     let url = new URL("https://example.com/search");
 
-    if (titleValue != "") {
+    if (titleValue !== "") {
       url.searchParams.append('cocktail', titleValue);
     }
-
-    if (tagValue != "") {
+    if (tagValue !== "") {
       url.searchParams.append('tag', tagValue);
     }
-
     if (checkbox1Marked == true) {
       url.searchParams.append('short', 'true');
     }
