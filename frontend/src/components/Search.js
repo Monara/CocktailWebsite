@@ -77,9 +77,9 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
             </div> 
             <div id="search-area">
               <p>By title</p>
-              <Autocomplete data={autocompleteTitles} val={titleValue => setTitleValue(titleValue)}/>
+              <Autocomplete data={autocompleteTitles} onChange={titleValue => setTitleValue(titleValue)}/>
               <p>By ingredient</p>
-              <Autocomplete data={autocompleteTags} val={tagValue => setTagValue(tagValue)}/>
+              <Autocomplete data={autocompleteTags} onChange={tagValue => setTagValue(tagValue)}/>
               <div className='filters'>
                 <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>Filter&nbsp;
                   {filterVisibility ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}

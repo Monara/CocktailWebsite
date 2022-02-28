@@ -1,23 +1,25 @@
-/**
+/**modified from
  * source:
  * https://github.com/w3collective/react-autocomplete-search
  */
 import { useState } from "react";
 import './Autocomplete.css'
 
-const Autocomplete = (props) => {
+const Autocomplete = ({data, onChange}) => {
 
     const [suggestions, setSuggestions] = useState([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);
     const [suggestionsActive, setSuggestionsActive] = useState(false);
     const [value, setValue] = useState('');
 
-    var data = props.data;
-    props.val(value);
+    const inputChanged = (value) => {
+      setValue(value);
+      onChange(value);
+    };
 
     const handleChange = (e) => {
         const query = e.target.value.toLowerCase();
-        setValue(query);
+        inputChanged(query);
         if (query.length > 1) {
           const filterSuggestions = data.filter(
             (suggestion) => suggestion.toLowerCase().indexOf(query) > -1
@@ -31,7 +33,7 @@ const Autocomplete = (props) => {
 
       const handleClick = (e) => {
         setSuggestions([]);
-        setValue(e.target.innerText);
+        inputChanged(e.target.innerText);
         setSuggestionsActive(false);
       };
       
@@ -52,7 +54,7 @@ const Autocomplete = (props) => {
         }
         // ENTER
         else if (e.keyCode === 13) {
-          setValue(suggestions[suggestionIndex]);
+          inputChanged(suggestions[suggestionIndex]);
           setSuggestionIndex(0);
           setSuggestionsActive(false);
         }
