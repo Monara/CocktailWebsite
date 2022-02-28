@@ -5,12 +5,15 @@
 import { useState } from "react";
 import './Autocomplete.css'
 
-const Autocomplete = ({data}) => {
+const Autocomplete = (props) => {
 
     const [suggestions, setSuggestions] = useState([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);
     const [suggestionsActive, setSuggestionsActive] = useState(false);
     const [value, setValue] = useState('');
+
+    var data = props.data;
+    props.val(value);
 
     const handleChange = (e) => {
         const query = e.target.value.toLowerCase();

@@ -37,12 +37,12 @@ app.get('/search', (req, res) => {
 	var statementCount = 0;
 
 	if (req.query.cocktail != null) {
-		sql_statement += " WHERE cocktail_id = " + req.query.cocktail; /*if searching by title, ignore other parameters */
-	}
+		sql_statement += " WHERE title = '" + req.query.cocktail + "'"; /*if searching by title, ignore other parameters */
+	} 
 
 	else {
 		if (req.query.tag != null) {
-			sql_statement += " INNER JOIN tags_and_cocktails ON cocktail_list.cocktail_id = tags_and_cocktails.cocktail_id WHERE tags_and_cocktails.tag_id = " + req.query.tag;
+			sql_statement += " JOIN tags_and_cocktails ON cocktail_list.cocktail_id = tags_and_cocktails.cocktail_id JOIN cocktail_tags ON tags_and_cocktails.tag_id = cocktail_tags.tag_id WHERE cocktail_tags.tag_en = '" + req.query.tag + "'";
 			statementCount++;
 		}
 
