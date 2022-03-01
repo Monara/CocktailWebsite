@@ -17,7 +17,6 @@ function Home() {
       .then((res) => res.json())
       .then((resultData) => setResultData(resultData));
       setShowRand(false);
-
     }
     else if (showRand === true) {
       fetch('/getRand')
@@ -31,7 +30,7 @@ function Home() {
         <Heading />
         <Search url={url => setUrl(url)}/>
         <div id='results'>
-          {resultData && resultData.map((item) => <SearchResult data={item} key={item.cocktail_id}/> )}
+          {resultData && resultData.map((item) => <SearchResult data={item} random={showRand} key={item.cocktail_id}/> )}
         </div>
         <Footer />
     </div>

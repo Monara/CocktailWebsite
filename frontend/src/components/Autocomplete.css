@@ -1,7 +1,7 @@
  .search { /*input field styling*/
   background-color: var(--blue);
   border: none;
-  border-bottom: 2px solid var(--almostblack);
+  border-bottom: 1px solid var(--almostblack);
   font-family: var(--font2);
   font-size: calc(8px + 1vw);
   /*border-radius: 0; /*iphone shows rounded*/
@@ -9,7 +9,7 @@
 }
 
 .search:focus {
-  border-bottom: 3px solid var(--almostblack);
+  border-bottom: 2px solid var(--almostblack);
   outline: none; /*rid of default blue outline*/
 }
 

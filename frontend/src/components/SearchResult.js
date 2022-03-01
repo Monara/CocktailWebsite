@@ -21,6 +21,7 @@ function SearchResult(props) {
         <div className='search-result-container'>
             <img src={img} className='search-result-img' alt='' />
             <div className='text'>
+            {props.random && <p><b>Random cocktail:</b></p>}
                 <h3>{data.title}</h3>
                 <p dangerouslySetInnerHTML={{__html: ingredients}} />
             </div>

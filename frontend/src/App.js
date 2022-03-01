@@ -1,4 +1,3 @@
-import React, {useState, useEffect} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import PageNotFound from  './components/PageNotFound';
@@ -20,4 +19,3 @@ function App() {
 }
 
 export default App;
-/*unique key to avoid warning*/

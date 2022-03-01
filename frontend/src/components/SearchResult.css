@@ -19,7 +19,6 @@
 
 div.text > p { /*to not crowd all paragraphs on search results*/
     line-height: 150%;
-
 }
 
 .search-result-img {
@@ -47,6 +46,7 @@ div.text > p { /*to not crowd all paragraphs on search results*/
     background-color: white;
     border-radius: 5px 5px 0 0;
     list-style: none;
+    z-index: 1;
 }
 
 .tab:hover {
@@ -56,6 +56,5 @@ div.text > p { /*to not crowd all paragraphs on search results*/
 
 .react-tabs__tab--selected {
     color: var(--almostblack);
-    border-color: white;
     border-bottom: 1px solid var(--almostblack);
   }
