@@ -18,8 +18,3 @@
     transform: skewY(-12deg); /*unskew*/
     align-self: flex-end; /*move text to bottom*/
 }
-
-.empty { /*rid of white footer area*/
-    background-color: var(--background);
-   
-}

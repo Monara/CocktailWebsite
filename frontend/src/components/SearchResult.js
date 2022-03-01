@@ -8,7 +8,7 @@ function SearchResult(props) {
    var img = "images/cocktail-img/" + data.cocktail_id + ".png";
     var ingredients = data.ingredients.replace(/\n|\r\n/g, "<br>"); /*newlines and carriage returns in database */
 
-    let [garnishVal, setGarnishVal] = useState(data.garnish != null);
+    let [garnishVal] = useState(data.garnish != null);
 
   return (
     <>

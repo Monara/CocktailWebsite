@@ -57,10 +57,10 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
     if (tagValue !== "") {
       url.searchParams.append('tag', tagValue);
     }
-    if (checkbox1Marked == true) {
+    if (checkbox1Marked === true) {
       url.searchParams.append('short', 'true');
     }
-    if (checkbox2Marked == true) {
+    if (checkbox2Marked === true) {
       url.searchParams.append('vegan', 'true');
     }
     return url.toString().substring(19);

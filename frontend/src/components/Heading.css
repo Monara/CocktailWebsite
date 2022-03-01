@@ -39,7 +39,7 @@
 }
 
 .menu-dropdown li:hover {
-    background-color: var(--almostblack);
+    background-color: var(--yellow);
 }
 
 .heading-title {
