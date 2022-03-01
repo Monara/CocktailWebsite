@@ -1,15 +1,10 @@
 
 .heading-container {
     background-color: var(--yellow);
-    border-top-left-radius: 30%;
-    border-bottom-left-radius: 60%;
-    transform: skewY(-12deg);
-    min-height: 50vw;
+    max-height: 30vw;
 }
-
 .menu-container {
     padding: 2%;
-    transform: skewY(12deg); /*unskew*/
 }
 
 .menu-icon {
@@ -48,7 +43,7 @@
 }
 
 .heading-title {
-    padding-top: 10%;
+    /*margin-top: -5%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,4 +53,12 @@
 #heading-img {
     width: calc(20px + 5vw);
     height: auto;
+}
+
+#wave {
+    width: 100%;
+}
+
+#wave path {
+   fill: var(--yellow);
 }

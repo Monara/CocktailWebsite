@@ -31,6 +31,14 @@ app.get('/getTags', (req, res) => {
 	});
 });
 
+/*get random cocktail so page isn't empty*/
+app.get('/getRand', (req, res) => {
+	conn.query("SELECT * FROM cocktail_list ORDER BY RAND() LIMIT 1", function(error, results) {
+		if (error) throw error;
+		res.send(results); 
+	});
+});
+
 /*main cocktail search */
 app.get('/search', (req, res) => {
 	var sql_statement = "SELECT * FROM cocktail_list"; /* nothing marked: send all*/

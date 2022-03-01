@@ -5,7 +5,7 @@
 import { useState } from "react";
 import './Autocomplete.css'
 
-const Autocomplete = ({data, onChange}) => {
+const Autocomplete = ({placeholder, data, onChange}) => {
 
     const [suggestions, setSuggestions] = useState([]);
     const [suggestionIndex, setSuggestionIndex] = useState(0);
@@ -86,6 +86,7 @@ const Autocomplete = ({data, onChange}) => {
             type='text'
             className='search'
             value={value}
+            placeholder={placeholder}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
           />

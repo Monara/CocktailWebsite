@@ -1,14 +1,15 @@
  .search { /*input field styling*/
-  border: 1px solid var(--almostblack);
-  line-height: 180%;
+  background-color: var(--blue);
+  border: none;
+  border-bottom: 2px solid var(--almostblack);
   font-family: var(--font2);
   font-size: calc(8px + 1vw);
-  border-radius: 0; /*iphone shows rounded*/
-  padding-left: 1%;
+  /*border-radius: 0; /*iphone shows rounded*/
+  padding-top: 5%;
 }
 
 .search:focus {
-  border: 2px solid var(--almostblack);
+  border-bottom: 3px solid var(--almostblack);
   outline: none; /*rid of default blue outline*/
 }
 

@@ -9,6 +9,8 @@
     align-items: center;
     column-gap: 10%;
     border-radius: 10px 0px 10px 10px;
+    z-index: 1;
+    position: relative;
 }
 
 .text {

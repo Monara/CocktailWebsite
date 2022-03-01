@@ -1,19 +1,20 @@
 .App {
     display: flex;
     flex-direction: column;
-    gap: 10vw;
+    gap: 5vw;
     background-color: var(--background);
-    /*background-image: url("imgs/confetti.png");*/
+    /*background-image: url("imgs/first.png");*/
 }
 
 #results {
     display: flex;
     flex-direction: column;
     gap: 5vw;
-    padding-bottom: 20vw;
 }
 
 @media only screen and (min-width: 1200px) {
-   
+   .App {
+        
+   }
 
 }

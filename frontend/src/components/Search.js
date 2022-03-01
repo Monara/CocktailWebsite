@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import './Search.css';
-import img from "../imgs/mint.png";
 import Autocomplete from "./Autocomplete";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
@@ -21,12 +20,12 @@ const [checkbox2Marked, markCheckbox2] = useState(false);
 const Filters = () =>
 
 <div className='filter-container'>
-    <label className="filter">
+    <label>
         <input type="checkbox" onClick={() => { markCheckbox1(!checkbox1Marked) }} />
         {checkbox1Marked ? <FontAwesomeIcon className='' icon={faSquareCheck} /> : <FontAwesomeIcon className='' icon={faSquare} />}
         &nbsp;3 ingredients or less
     </label>
-    <label className="filter">
+    <label>
         <input type="checkbox" onClick={ () => {markCheckbox2(!checkbox2Marked) }} />
         {checkbox2Marked ? <FontAwesomeIcon className='' icon={faSquareCheck} /> : <FontAwesomeIcon className='' icon={faSquare} />}
         &nbsp;vegan
@@ -71,23 +70,16 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
     <>
       <div className='color-container'>
         <div className='search-container'>
-            <div className='search-title'>
-                <h2>Find a cocktail</h2>
-                <img src={img} id='search-img' alt='' />
-            </div> 
-            <div id="search-area">
-              <p>By title</p>
-              <Autocomplete data={autocompleteTitles} onChange={titleValue => setTitleValue(titleValue)}/>
-              <p>By ingredient</p>
-              <Autocomplete data={autocompleteTags} onChange={tagValue => setTagValue(tagValue)}/>
+              <h2>Find a cocktail</h2>
+              <Autocomplete placeholder={"By title"} data={autocompleteTitles} onChange={titleValue => setTitleValue(titleValue)}/>
+              <Autocomplete placeholder={"By ingredient"} data={autocompleteTags} onChange={tagValue => setTagValue(tagValue)}/>  
               <div className='filters'>
-                <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>Filter&nbsp;
+                <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>{filterVisibility ? "Less" : "More"}&nbsp;
                   {filterVisibility ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
                 </button>
                 {filterVisibility && <Filters />}
               </div>
-              <button id='search-button' onClick={() => props.url(searchClick())}>Search <FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-		        </div>       
+              <button id='search-button' onClick={() => props.url(searchClick())}>Search <FontAwesomeIcon icon={faMagnifyingGlass} /></button>      
         </div>    
       </div>
     </>

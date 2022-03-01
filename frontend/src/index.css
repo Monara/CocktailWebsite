@@ -7,7 +7,9 @@
   --almostblack:  rgba(35, 35, 35, 1);
   --blue: rgba(160, 218, 244);
   --lightblue: rgba(194, 228, 243);
+  --darkblue: rgb(125, 209, 248);
   --green: rgba(185, 232, 112, 1);
+  --purple: rgba(205, 191, 231, 1);
   --font1: 'Fredericka the Great', 'Purple Purse', cursive;
   --font2: 'Josefin Sans', sans-serif;
 }

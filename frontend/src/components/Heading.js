@@ -28,6 +28,7 @@ function Heading() {
 
   return (
       <>
+      <div>
       <div className='heading-container'>
         <div className='menu-container'>
             <button id='menu-button' onClick={menuClick} >
@@ -35,14 +36,18 @@ function Heading() {
             </button>
             {menuVisibility && <Dropdown />}
             <div className='heading-title'>
-                <img src={img} id='heading-img' alt="" />
                 <div className='heading-text'>
                     <h1>The Cocktail Party</h1>
                     <p>Classic cocktail recipes</p>
                 </div>
+                <img src={img} id='heading-img' alt="" />
             </div>        
-        </div>    
+        </div>   
       </div>
+      <svg id='wave' viewBox="0 0 500 150" preserveAspectRatio="none">
+            <path d="M0.56,1.47 C172.12,132.72 311.51,-59.70 507.90,21.22 L497.74,-38.97 L0.00,-0.48 Z"></path>
+    </svg>
+    </div> 
       </>
   )
 }
