@@ -46,7 +46,6 @@ div.text > p { /*to not crowd all paragraphs on search results*/
     background-color: white;
     border-radius: 5px 5px 0 0;
     list-style: none;
-    z-index: 1;
 }
 
 .tab:hover {

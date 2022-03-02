@@ -62,6 +62,7 @@ const Autocomplete = ({placeholder, data, onChange}) => {
 
       const Suggestions = () => {
         return (
+        
         <div className='suggestions'> 
           <ul>
             {suggestions.map((suggestion, index) => {

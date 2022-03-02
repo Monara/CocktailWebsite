@@ -30,7 +30,7 @@ function Home() {
     background: "var(--faintpurple)",
     width: "30px",
     height: "30px",
-    "border-radius": "50%",
+    borderRadius: "50%",
     padding: "0.5%"
   }
 
@@ -39,7 +39,7 @@ function Home() {
         <Heading />
         <Search url={url => setUrl(url)}/>
         <div id='results'>
-          {resultData && resultData.map((item) => <SearchResult data={item} random={showRand} key={item.cocktail_id}/> )}
+          {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.cocktail_id}/>) : <p id='no-result'>No results found</p>}
         </div>
         <ScrollUpButton 
           StopPosition={0}
