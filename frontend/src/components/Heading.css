@@ -67,4 +67,8 @@
     .menu-dropdown {
         width: 7%;
     }
+
+    .menu-dropdown ul {
+        font-size: calc(8px + 0.8vw);
+    }  
 }

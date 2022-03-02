@@ -1,7 +1,7 @@
 .Home {
     display: flex;
     flex-direction: column;
-    gap: 5vw;
+    gap: 4vw;
     background-color: var(--background);
     /*background-image: url("imgs/first.png");*/
 }
@@ -9,7 +9,7 @@
 #results {
     display: flex;
     flex-direction: column;
-    gap: 5vw;
+    gap: 2vw;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -20,5 +20,4 @@
     body {
         background-color: white;
     }
- 
  }

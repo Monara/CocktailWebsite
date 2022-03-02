@@ -10,6 +10,7 @@
   --darkblue: rgb(125, 209, 248);
   --green: rgba(185, 232, 112, 1);
   --purple: rgba(205, 191, 231, 1);
+  --faintpurple: rgba(205, 191, 231, 0.5);
   --font1: 'Fredericka the Great', 'Purple Purse', cursive;
   --font2: 'Josefin Sans', sans-serif;
 }

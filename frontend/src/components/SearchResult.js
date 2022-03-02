@@ -11,6 +11,7 @@ function SearchResult(props) {
     let [garnishVal] = useState(data.garnish != null);
 
   return (
+
     <>
     <Tabs>
         <TabList className='tab-list'>

@@ -4,6 +4,7 @@ import Heading from './components/Heading';
 import Search from  './components/Search';
 import SearchResult from './components/SearchResult';
 import Footer from  './components/Footer';
+import ScrollUpButton from "react-scroll-up-button";
 
 function Home() {
 
@@ -25,6 +26,14 @@ function Home() {
     }
   }, [url, showRand]); /*[url] means will run again when updated */
 
+  var scrollStyle = {
+    background: "var(--faintpurple)",
+    width: "30px",
+    height: "30px",
+    "border-radius": "50%",
+    padding: "0.5%"
+  }
+
   return (
     <div className="Home">
         <Heading />
@@ -32,6 +41,16 @@ function Home() {
         <div id='results'>
           {resultData && resultData.map((item) => <SearchResult data={item} random={showRand} key={item.cocktail_id}/> )}
         </div>
+        <ScrollUpButton 
+          StopPosition={0}
+          ShowAtPosition={300}
+          EasingType='easeOutCubic'
+          AnimationDuration={500}
+          ContainerClassName='ScrollUpButton__Container'
+          TransitionClassName='ScrollUpButton__Toggled'
+          style={scrollStyle}
+          ToggledStyle={{}}
+        />
         <Footer />
     </div>
   );
