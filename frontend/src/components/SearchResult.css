@@ -1,7 +1,7 @@
- .search-result-container {
+  .search-result-container {
     padding: 0;
-    width: 60%;
-    margin-left: 20%;
+    width: 60%;/*match*/
+    margin-left: 20%;/*match*/
     background-color: white;
     display: flex;
     flex-direction: row;
@@ -31,10 +31,10 @@ div.text > p { /*to not crowd all paragraphs on search results*/
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    width: 60%;
+    width: 60%; /*match*/
+    margin-left: 20%; /*match*/
     column-gap: 1%;
     padding: 0;
-    margin-left: 20%;
     margin-bottom: 0;
 }
 
@@ -58,3 +58,26 @@ div.text > p { /*to not crowd all paragraphs on search results*/
     color: var(--almostblack);
     border-bottom: 1px solid var(--almostblack);
   }
+
+  @media only screen and (max-width: 600px), (min-width: 1200px) {
+    .search-result-container {
+        column-gap: 5%;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .tab-list {
+        width: 80%;
+        margin-left: 10%;
+
+    }
+    
+}
+
+@media only screen and (min-width: 1200px) {
+    .tab {
+        font-size: calc(8px + 0.7vw);
+    }
+}
+
+ 

@@ -7,7 +7,7 @@
     border-top-left-radius: 50%;
     transform: skewY(12deg);
     height: fit-content;
-    max-width: 45vw;
+    width: 45%;
     margin-top: -10%;
 }
 
@@ -49,4 +49,10 @@ label input { /*hide default checkbox*/
     cursor: pointer;
     border-radius: 30% 60% 40% 70%;
     
+}
+
+@media only screen and (min-width: 1200px) {
+    .color-container {
+        width: 60%;
+    }
 }
