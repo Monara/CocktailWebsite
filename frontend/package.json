@@ -19,6 +19,7 @@
     "react-responsive-image": "^5.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "react-search-autocomplete": "^6.0.0",
     "react-tabs": "^3.2.3",
     "web-vitals": "^2.1.4"
   },

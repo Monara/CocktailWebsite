@@ -52,6 +52,10 @@ label input { /*hide default checkbox*/
     
 }
 
+#input-autocomplete {
+    width: 70%;
+}
+
 @media only screen and (min-width: 1200px) {
     .color-container {
         width: 60%;

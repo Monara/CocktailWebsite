@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './Search.css';
-import Autocomplete from "./Autocomplete";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
@@ -10,13 +10,14 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function Search(props) {
 
+  /*States */
 const [filterVisibility, setFilterVisibility] = useState(false);
 const [titleValue, setTitleValue] = useState("");
 const [tagValue, setTagValue] = useState("");
 const [checkbox1Marked, markCheckbox1] = useState(false);
 const [checkbox2Marked, markCheckbox2] = useState(false);
 
-
+/*Checkboxes for filtering */
 const Filters = () =>
 
 <div className='filter-container'>
@@ -32,8 +33,9 @@ const Filters = () =>
     </label>
 </div>;
 
-let [autocompleteTitles, setAutocompleteTitle] = useState(null);
-let [autocompleteTags, setAutocompleteTag] = useState(null);
+/*Fetch data for autocomplete search*/
+let [autocompleteTitles, setAutocompleteTitle] = useState(""); /**pakeista cia */
+let [autocompleteTags, setAutocompleteTag] = useState("");
 
   useEffect(() => {
     fetch("/getTitles")
@@ -47,10 +49,10 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
       .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
   }, []);
 
+  /*Make a URL for search upon clicking button */
   function searchClick() {
 
     let url = new URL("https://example.com/search");
-
     if (titleValue !== "") {
       url.searchParams.append('cocktail', titleValue);
     }
@@ -66,13 +68,70 @@ let [autocompleteTags, setAutocompleteTag] = useState(null);
     return url.toString().substring(19);
   }
 
+  /*format autosuggestions */
+  const formatResult = (item) => {
+    return (
+      <>
+        <span style={{ display: 'block', textAlign: 'left' }}>{item.title ? item.title : item.tag_en}</span>
+      </>
+    )
+  }
+
+  /*Style input fields */
+  const inputStyle =
+  {
+    height: "40px",
+    borderRadius: "12px",
+    border: "none",
+    backgroundColor: "var(--blue)",
+    boxShadow: "none",
+    hoverBackgroundColor: "var(--lightblue)",
+    color: "var(--almostblack)",
+    fontSize: "calc(8px + 0.7vw)",
+    fontFamily: "var(--font2)",
+    iconColor: "var(--almostblack)",
+    lineColor: "var(--almostblack)",
+    placeholderColor: "var(--darkgray)",
+    //zIndex: 2, //only for one
+  };
+
+  const handleKeyDown = (e) => {
+    // ENTER
+    if (e.keyCode === 13) {
+      props.url(searchClick());
+    }
+  };
+
   return (
     <>
       <div className='color-container'>
         <div className='search-container'>
               <h2>Find a cocktail</h2>
-              <Autocomplete placeholder={"By title"} data={autocompleteTitles} onChange={titleValue => setTitleValue(titleValue)}/>
-              <Autocomplete placeholder={"By ingredient"} data={autocompleteTags} onChange={tagValue => setTagValue(tagValue)}/>  
+              <div id="input-autocomplete">
+                <ReactSearchAutocomplete
+                  id="input-title"
+                  items={autocompleteTitles}
+                  onSelect={(item) => setTitleValue(item.title)}
+                  autoFocus
+                  formatResult={formatResult}
+                  fuseOptions={{keys: ["cocktail_id", "title"], minMatchCharLength: 2}}
+                  resultStringKeyName="title"
+                  placeholder="By title"
+                  showIcon={false}
+                  styling={inputStyle}
+                />
+                <ReactSearchAutocomplete
+                  items={autocompleteTags}
+                  onSelect={(item) => setTagValue(item.tag_en)}
+                  autoFocus
+                  formatResult={formatResult}
+                  fuseOptions={{keys: ["tag_id", "tag_en"], minMatchCharLength: 2}}
+                  resultStringKeyName="tag_en"
+                  placeholder="By ingredient"
+                  showIcon={false}
+                  styling={inputStyle}
+                />
+              </div>
               <div className='filters'>
                 <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>{filterVisibility ? "Less" : "More"}&nbsp;
                   {filterVisibility ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
