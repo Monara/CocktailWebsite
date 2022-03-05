@@ -7,10 +7,11 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { faSquare } from '@fortawesome/free-regular-svg-icons';
 import { faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { inputStyle } from './Styles';
 
 function Search(props) {
 
-  /*States */
+/*States */
 const [filterVisibility, setFilterVisibility] = useState(false);
 const [titleValue, setTitleValue] = useState("");
 const [tagValue, setTagValue] = useState("");
@@ -22,13 +23,13 @@ const Filters = () =>
 
 <div className='filter-container'>
     <label>
-        <input type="checkbox" onClick={() => { markCheckbox1(!checkbox1Marked) }} />
-        {checkbox1Marked ? <FontAwesomeIcon className='' icon={faSquareCheck} /> : <FontAwesomeIcon className='' icon={faSquare} />}
+        <input type="checkbox" onClick={() => { markCheckbox1(!checkbox1Marked)}} />
+        {checkbox1Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}
         &nbsp;3 ingredients or less
     </label>
     <label>
-        <input type="checkbox" onClick={ () => {markCheckbox2(!checkbox2Marked) }} />
-        {checkbox2Marked ? <FontAwesomeIcon className='' icon={faSquareCheck} /> : <FontAwesomeIcon className='' icon={faSquare} />}
+        <input type="checkbox" onClick={() => {markCheckbox2(!checkbox2Marked)}} />
+        {checkbox2Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}
         &nbsp;vegan
     </label>
 </div>;
@@ -71,35 +72,13 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
   /*format autosuggestions */
   const formatResult = (item) => {
     return (
-      <>
         <span style={{ display: 'block', textAlign: 'left' }}>{item.title ? item.title : item.tag_en}</span>
-      </>
     )
   }
 
-  /*Style input fields */
-  const inputStyle =
-  {
-    height: "40px",
-    borderRadius: "12px",
-    border: "none",
-    backgroundColor: "var(--blue)",
-    boxShadow: "none",
-    hoverBackgroundColor: "var(--lightblue)",
-    color: "var(--almostblack)",
-    fontSize: "calc(8px + 0.7vw)",
-    fontFamily: "var(--font2)",
-    iconColor: "var(--almostblack)",
-    lineColor: "var(--almostblack)",
-    placeholderColor: "var(--darkgray)",
-    //zIndex: 2, //only for one
-  };
-
-  const handleKeyDown = (e) => {
-    // ENTER
-    if (e.keyCode === 13) {
-      props.url(searchClick());
-    }
+  const handleSubmit = (e) => { /*Form used for ENTER key to work. Two inputs need a button within a form, included a dummy button. Including filters within form toggles their visibility. */
+    e.preventDefault();
+    props.url(searchClick());
   };
 
   return (
@@ -107,38 +86,45 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
       <div className='color-container'>
         <div className='search-container'>
               <h2>Find a cocktail</h2>
-              <div id="input-autocomplete">
+              <form onSubmit={handleSubmit}>
+              <div className="input-autocomplete" style={{zIndex: 1}}>
                 <ReactSearchAutocomplete
-                  id="input-title"
                   items={autocompleteTitles}
-                  onSelect={(item) => setTitleValue(item.title)}
+                  onSelect={(item) => setTitleValue(item.id)}
                   autoFocus
                   formatResult={formatResult}
-                  fuseOptions={{keys: ["cocktail_id", "title"], minMatchCharLength: 2}}
+                  fuseOptions={{keys: ["id", "title"], minMatchCharLength: 2}}
                   resultStringKeyName="title"
                   placeholder="By title"
                   showIcon={false}
+                  onClear={() => setTitleValue("")}
                   styling={inputStyle}
-                />
+                /> 
+              </div>
+              <div id="empty"></div>
+              <div className="input-autocomplete">
                 <ReactSearchAutocomplete
                   items={autocompleteTags}
-                  onSelect={(item) => setTagValue(item.tag_en)}
+                  onSelect={(item) => setTagValue(item.id)}
                   autoFocus
                   formatResult={formatResult}
-                  fuseOptions={{keys: ["tag_id", "tag_en"], minMatchCharLength: 2}}
+                  fuseOptions={{keys: ["id", "tag_en"], minMatchCharLength: 2}}
                   resultStringKeyName="tag_en"
                   placeholder="By ingredient"
                   showIcon={false}
+                  onClear={() => setTagValue("")}
                   styling={inputStyle}
                 />
               </div>
+              <button style={{display:"none"}}></button>
+              </form> 
               <div className='filters'>
-                <button id='filter-button' onClick={ () => {setFilterVisibility(!filterVisibility) }}>{filterVisibility ? "Less" : "More"}&nbsp;
+                <button id='filter-button' onClick={() => {setFilterVisibility(!filterVisibility) }}>{filterVisibility ? "Less" : "More"}&nbsp;
                   {filterVisibility ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
                 </button>
                 {filterVisibility && <Filters />}
               </div>
-              <button id='search-button' onClick={() => props.url(searchClick())}>Search <FontAwesomeIcon icon={faMagnifyingGlass} /></button>      
+              <button id='search-button' onClick={() => props.url(searchClick())}>Search <FontAwesomeIcon icon={faMagnifyingGlass} /></button>     
         </div>    
       </div>
     </>

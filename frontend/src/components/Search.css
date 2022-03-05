@@ -48,16 +48,26 @@ label input { /*hide default checkbox*/
     padding: 10%;
     margin-top: 5%;
     cursor: pointer;
-    border-radius: 30% 60% 40% 70%;
-    
+    border-radius: 30% 60% 40% 70%; 
 }
 
-#input-autocomplete {
-    width: 70%;
+#empty {
+    height: 2vw;
+}
+
+/*react autocomplete component doesn't support single border styling, width*/
+.input-autocomplete {
+    width: 80%;
+    border-bottom: 1px solid var(--almostblack);
+    position: relative;
 }
 
 @media only screen and (min-width: 1200px) {
     .color-container {
         width: 60%;
+    }
+
+    .input-autocomplete {
+        width: 70%;
     }
 }

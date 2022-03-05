@@ -5,41 +5,39 @@ import Search from  './components/Search';
 import SearchResult from './components/SearchResult';
 import Footer from  './components/Footer';
 import ScrollUpButton from "react-scroll-up-button";
+import { scrollStyle } from './components/Styles';
 
 function Home() {
 
   let [url, setUrl] = useState('');
-  let [showRand, setShowRand] = useState(true);
+  let [showRand, setShowRand] = useState(false);
   let [resultData, setResultData] = useState(null);
 
   useEffect(() => {
-    if (url !== '') { /*so not empty string on loading */
-      fetch(url)
-      .then((res) => res.json())
-      .then((resultData) => setResultData(resultData));
-      setShowRand(false);
-    }
-    else if (showRand === true) {
+    if (url === '') { /*if URL is empty show random */
+      setShowRand(true);
       fetch('/getRand')
       .then((res) => res.json())
       .then((resultData) => setResultData(resultData));
     }
-  }, [url, showRand]); /*[url] means will run again when updated */
-
-  var scrollStyle = {
-    background: "var(--faintpurple)",
-    width: "30px",
-    height: "30px",
-    borderRadius: "50%",
-    padding: "0.5%"
-  }
+    else if (url === '/search') { /**if no search criteria present show no result */
+      setShowRand(false);
+      setResultData(null);
+    }
+    else { /*else show results with URL*/
+      setShowRand(false);
+      fetch(url)
+      .then((res) => res.json())
+      .then((resultData) => setResultData(resultData));
+    }
+  }, [url]); /*[url] means will run again when updated */
 
   return (
     <div className="Home">
         <Heading />
         <Search url={url => setUrl(url)}/>
         <div id='results'>
-          {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.cocktail_id}/>) : <p id='no-result'>No results found</p>}
+          {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.id}/>) : <p id='no-result'>No results found</p>}
         </div>
         <ScrollUpButton 
           StopPosition={0}

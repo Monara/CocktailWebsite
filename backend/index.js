@@ -18,14 +18,14 @@ conn.connect(function(err){
 
 /*functions for autosuggestions */
 app.get('/getTitles', (req, res) => {
-	conn.query("SELECT cocktail_id, title FROM cocktail_list", function(error, results) {
+	conn.query("SELECT id, title FROM cocktail_list", function(error, results) {
 		if (error) throw error;
 		res.send(results);
 	});
 });
 
 app.get('/getTags', (req, res) => {
-	conn.query("SELECT tag_id, tag_en FROM cocktail_tags", function(error, results) {
+	conn.query("SELECT id, tag_en FROM cocktail_tags", function(error, results) {
 		if (error) throw error;
 		res.send(results); 
 	});
@@ -40,50 +40,51 @@ app.get('/getRand', (req, res) => {
 });
 
 /*main cocktail search */
-app.get('/search', (req, res) => {
-	var sql_statement = "SELECT * FROM cocktail_list"; /* nothing marked: send all*/
-	var statementCount = 0;
+app.get('/search', (req, res) => { /*currently works by taking id from user selection so no free user input. Parametrized query better if using user input (cocktail.title, tag_en) */
+
 	var cocktail = req.query.cocktail;
 	var tag = req.query.tag;
 	var vegan = req.query.vegan;
 	var short = req.query.short;
 
+	var statement = "SELECT * FROM cocktail_list";
+
 	if (cocktail != null) {
-		sql_statement += " WHERE title ='" + cocktail.replace(/'/g, "''") + "'";  /*if searching by title, ignore other parameters */
+		 /*if searching by title, ignore other parameters */
+		conn.query("SELECT * FROM cocktail_list WHERE id=?", [cocktail], function(error, results) {if (error) throw error; res.send(results);});    
 	} 
+	else if (tag != null) {
 
-	else {
-		if (tag != null) {
-			sql_statement += " JOIN tags_and_cocktails ON cocktail_list.cocktail_id = tags_and_cocktails.cocktail_id JOIN cocktail_tags ON tags_and_cocktails.tag_id = cocktail_tags.tag_id WHERE cocktail_tags.tag_en = '" + tag.replace(/'/g, "''") + "'";
-			statementCount++;
+		if (tag != null && vegan != null && short != null) {
+			conn.query("SELECT * FROM cocktail_list JOIN tags_and_cocktails ON cocktail_list.id = tags_and_cocktails.cocktail_id WHERE tags_and_cocktails.tag_id = ? AND cocktail_list.vegan=1 AND cocktail_list.ingredient_count <= 3", [tag], function(error, results) {
+				if (error) throw error; res.send(results);}); 
 		}
+		else if (tag != null && vegan != null ) {
+			conn.query("SELECT * FROM cocktail_list JOIN tags_and_cocktails ON cocktail_list.id = tags_and_cocktails.cocktail_id WHERE tags_and_cocktails.tag_id = ? AND cocktail_list.vegan=1", [tag], function(error, results) {
+				if (error) throw error; res.send(results);}); 
+		}
+		else if (tag != null && short != null) {
+			conn.query("SELECT * FROM cocktail_list JOIN tags_and_cocktails ON cocktail_list.id = tags_and_cocktails.cocktail_id WHERE tags_and_cocktails.tag_id = ? AND cocktail_list.ingredient_count <= 3", [tag], function(error, results) {
+				if (error) throw error; res.send(results);}); 
+		}
+		else {
+			conn.query("SELECT * FROM cocktail_list INNER JOIN tags_and_cocktails ON cocktail_list.id = tags_and_cocktails.cocktail_id WHERE tags_and_cocktails.tag_id = ?", [tag], function(error, results) {
+				if (error) throw error; res.send(results);}); 
+		}
+	}	
+	
+	else if (vegan != null || short != null) {
 
-		if (vegan != null) {
-			if(statementCount > 0) {
-				sql_statement += " AND cocktail_list.vegan =" + vegan;
-			}
-			else {	
-				sql_statement += " WHERE cocktail_list.vegan =" + vegan;
-			}
-			statementCount++;	
-		}
-		
-		if (short != null) {
-			if(statementCount > 0) {
-				sql_statement += " AND cocktail_list.ingredient_count <= 3";
-			}
-			else { 
-				sql_statement += " WHERE cocktail_list.ingredient_count <= 3";
-			}
-			statementCount++;
-		}
-	}
+		if (vegan != null && short != null) { statement += " WHERE cocktail_list.vegan=1 AND cocktail_list.ingredient_count <= 3"}
+		else if (vegan != null) {statement += " WHERE cocktail_list.vegan=1"}
+		else if (short != null) { statement += " WHERE cocktail_list.ingredient_count <= 3"}
 
-		statementCount = 0;
-		conn.query(sql_statement, function(error, results) {
+		conn.query(statement, function(error, results) {
 			if (error) throw error;
 			res.send(results);  
-		});    
+		}); 
+	}
+	
   });
 
 app.listen(PORT, () => {

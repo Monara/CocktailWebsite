@@ -13,12 +13,12 @@ function Heading() {
     
     <div className="menu-dropdown">
         <ul>
-            <li>
-                <Link to="/lt">LT</Link>
-            </li>
-            <li>
-                <Link to="/info">Info</Link>
-            </li>
+            <Link to="/lt">
+                <li>LT</li>
+            </Link>
+            <Link to="/info">
+                <li>Info</li>
+            </Link>
         </ul>
     </div>;
 

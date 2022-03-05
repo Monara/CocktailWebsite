@@ -5,7 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 function SearchResult(props) {
 
    let data = props.data;
-   var img = "images/cocktail-img/" + data.cocktail_id + ".png";
+   var img = "images/cocktail-img/" + data.id + ".png";
     var ingredients = data.ingredients.replace(/\n|\r\n/g, "<br>"); /*newlines and carriage returns in database */
 
     let [garnishVal] = useState(data.garnish != null);
