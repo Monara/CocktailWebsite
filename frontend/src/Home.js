@@ -16,11 +16,11 @@ function Home() {
   useEffect(() => {
     if (url === '') { /*if URL is empty show random */
       setShowRand(true);
-      fetch('/getRand')
+      fetch('/api/getRand')
       .then((res) => res.json())
       .then((resultData) => setResultData(resultData));
     }
-    else if (url === '/search') { /**if no search criteria present show no result */
+    else if (url === '/api/search') { /**if no search criteria present show no result */
       setShowRand(false);
       setResultData(null);
     }

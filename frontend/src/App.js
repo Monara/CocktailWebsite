@@ -11,7 +11,6 @@ function App() {
           <Route path="/" exact element={<Home />} /> 
           <Route path="/lt" exact element={<PageNotFound text="Puslapis kuriamas"/>} />
           <Route path="/info" exact element={<PageNotFound text="Page under construction" />} />
-          <Route path="*" element={<PageNotFound text="Page not found"/>} />
         </Routes>
       </BrowserRouter>
     </div>
@@ -19,3 +18,4 @@ function App() {
 }
 
 export default App;
+ /**<Route path="/" element={<PageNotFound text="Page not found"/>} /> */

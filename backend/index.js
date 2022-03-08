@@ -17,14 +17,14 @@ conn.connect(function(err){
 });
 
 /*functions for autosuggestions */
-app.get('/getTitles', (req, res) => {
+app.get('/api/getTitles', (req, res) => {
 	conn.query("SELECT id, title FROM cocktail_list", function(error, results) {
 		if (error) throw error;
 		res.send(results);
 	});
 });
 
-app.get('/getTags', (req, res) => {
+app.get('/api/getTags', (req, res) => {
 	conn.query("SELECT id, tag_en FROM cocktail_tags", function(error, results) {
 		if (error) throw error;
 		res.send(results); 
@@ -32,7 +32,7 @@ app.get('/getTags', (req, res) => {
 });
 
 /*get random cocktail so page isn't empty*/
-app.get('/getRand', (req, res) => {
+app.get('/api/getRand', (req, res) => {
 	conn.query("SELECT * FROM cocktail_list ORDER BY RAND() LIMIT 1", function(error, results) {
 		if (error) throw error;
 		res.send(results); 
@@ -40,7 +40,7 @@ app.get('/getRand', (req, res) => {
 });
 
 /*main cocktail search */
-app.get('/search', (req, res) => { /*currently works by taking id from user selection so no free user input. Parametrized query better if using user input (cocktail.title, tag_en) */
+app.get('/api/search', (req, res) => { /*currently works by taking id from user selection so no free user input. Parametrized query better if using user input (cocktail.title, tag_en) */
 
 	var cocktail = req.query.cocktail;
 	var tag = req.query.tag;

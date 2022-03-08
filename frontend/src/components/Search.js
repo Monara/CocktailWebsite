@@ -39,13 +39,13 @@ let [autocompleteTitles, setAutocompleteTitle] = useState(""); /**pakeista cia *
 let [autocompleteTags, setAutocompleteTag] = useState("");
 
   useEffect(() => {
-    fetch("/getTitles")
+    fetch("/api/getTitles")
       .then((res) => res.json())
       .then((autocompleteTitles) => setAutocompleteTitle(autocompleteTitles));
   }, []);
 
   useEffect(() => {
-    fetch("/getTags")
+    fetch("/api/getTags")
       .then((resp) => resp.json())
       .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
   }, []);
@@ -53,7 +53,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
   /*Make a URL for search upon clicking button */
   function searchClick() {
 
-    let url = new URL("https://example.com/search");
+    let url = new URL("https://example.com/api/search");
     if (titleValue !== "") {
       url.searchParams.append('cocktail', titleValue);
     }
