@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
+import InfoPage from './InfoPage';
 import PageNotFound from  './components/PageNotFound';
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} /> 
           <Route path="/lt" exact element={<PageNotFound text="Puslapis kuriamas"/>} />
-          <Route path="/info" exact element={<PageNotFound text="Page under construction" />} />
+          <Route path="/info" exact element={<InfoPage />} />
         </Routes>
       </BrowserRouter>
     </div>
