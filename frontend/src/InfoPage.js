@@ -4,15 +4,19 @@ import Heading from './components/Heading';
 import {EngText, LtText} from './components/Text';
 import Footer from  './components/Footer';
 import ScrollUpButton from "react-scroll-up-button";
+import { useContext } from "react";
 import { scrollStyle } from './components/Styles';
-
+import { LanguageContext } from './App';
 
 function InfoPage() {
+  
+  const language = useContext(LanguageContext);
+
   return (
     <div className='Home'>      
       <Heading />
       <div className='content'>
-        <LtText />
+        { language === "english" ? <EngText /> : <LtText />}
       </div>
       <ScrollUpButton 
           StopPosition={0}

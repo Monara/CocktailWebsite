@@ -6,8 +6,12 @@ import SearchResult from './components/SearchResult';
 import Footer from  './components/Footer';
 import ScrollUpButton from "react-scroll-up-button";
 import { scrollStyle } from './components/Styles';
+import { useContext } from "react";
+import { LanguageContext } from './App';
 
 function Home() {
+
+  const language = useContext(LanguageContext);
 
   let [url, setUrl] = useState('');
   let [showRand, setShowRand] = useState(false);
@@ -37,7 +41,7 @@ function Home() {
         <Heading />
         <Search url={url => setUrl(url)}/>
         <div id='results'>
-          {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.id}/>) : <p id='no-result'>No results found</p>}
+          {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.id}/>) : <p id='no-result'>{ language === "english" ? "No results found" : "Rezultatų nėra"}</p>}
         </div>
         <ScrollUpButton 
           StopPosition={0}

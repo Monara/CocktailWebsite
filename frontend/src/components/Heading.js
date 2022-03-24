@@ -5,16 +5,19 @@ import img from "../imgs/heading-img.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { useContext } from "react";
+import { LanguageContext } from '../App';
 
 function Heading() {
 
+    const language = useContext(LanguageContext);
     const [menuVisibility, setMenuVisibility] = useState(false);
     const Dropdown = () =>  
     
     <div className="menu-dropdown">
         <ul>
             <Link to="/lt">
-                <li>LT</li>
+                { language === "english"? <li>LT</li> : <li>EN</li> }
             </Link>
             <Link to="/info">
                 <li>Info</li>
@@ -37,8 +40,7 @@ function Heading() {
             {menuVisibility && <Dropdown />}
             <div className='heading-title'>
                 <div className='heading-text'>
-                    <h1>The Cocktail Party</h1>
-                    <p>Classic cocktail recipes</p>
+                { language === "english"? <><h1>The Cocktail Party</h1><p>Classic cocktail recipes</p></> : <><h1>Kokteilių vakarėlis</h1><p>Klasikinių kokteilių receptai</p></>}
                 </div>
                 <img src={img} id='heading-img' alt="" />
             </div>        

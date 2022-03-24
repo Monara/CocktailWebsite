@@ -1,7 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { createContext } from "react";
 import Home from './Home';
 import InfoPage from './InfoPage';
 import PageNotFound from  './components/PageNotFound';
+
+export const LanguageContext = createContext("lithuanian");
 
 function App() {
 
