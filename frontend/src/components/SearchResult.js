@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import './SearchResult.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import { useContext } from "react";
 import { LanguageContext } from '../App';
 
 function SearchResult(props) {
 
-    const language = useContext(LanguageContext);
+    const [language] = useContext(LanguageContext);
 
     let data = props.data;
     var img = "images/cocktail-img/" + data.id + ".png";

@@ -1,20 +1,16 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import './Search.css';
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { faSquare } from '@fortawesome/free-regular-svg-icons';
-import { faSquareCheck } from '@fortawesome/free-regular-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp, faChevronDown, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
 import { inputStyle } from './Styles';
-import { useContext } from "react";
 import { LanguageContext } from '../App';
 
 function Search(props) {
 
 /*Language chosen */
-const language = useContext(LanguageContext);
+const [language] = useContext(LanguageContext);
 /*States */
 const [filterVisibility, setFilterVisibility] = useState(false);
 const [titleValue, setTitleValue] = useState("");
@@ -29,7 +25,7 @@ const Filters = () =>
     <label>
         <input type="checkbox" onClick={() => { markCheckbox1(!checkbox1Marked)}} />
         {checkbox1Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;
-        { language === "english"? '3 ingredients or less' : '3 ingredientai ar mažiau' } 
+        { language === "english"? 'max. 3 ingredients' : '3 ingredientai ar mažiau' } 
     </label>
     <label>
         <input type="checkbox" onClick={() => {markCheckbox2(!checkbox2Marked)}} />
@@ -95,7 +91,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
     <>
       <div className='color-container'>
         <div className='search-container'>
-        { language === "english"? <h2>Find a cocktail</h2> : <h2>Paieška</h2> }
+        { language === "english"? <h2>Find a cocktail</h2> : <h2>Kokteiliu&#808; paieška</h2> }
               <form onSubmit={handleSubmit}>
               <div className="input-autocomplete" style={{zIndex: 1}}>
                 <ReactSearchAutocomplete

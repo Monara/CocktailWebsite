@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './Home.css';
 import Heading from './components/Heading';
 import Search from  './components/Search';
@@ -6,12 +6,11 @@ import SearchResult from './components/SearchResult';
 import Footer from  './components/Footer';
 import ScrollUpButton from "react-scroll-up-button";
 import { scrollStyle } from './components/Styles';
-import { useContext } from "react";
 import { LanguageContext } from './App';
 
 function Home() {
 
-  const language = useContext(LanguageContext);
+  const [language] = useContext(LanguageContext);
 
   let [url, setUrl] = useState('');
   let [showRand, setShowRand] = useState(false);

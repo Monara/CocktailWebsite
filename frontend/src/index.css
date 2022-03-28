@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Purple+Purse&family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Abril+Fatface&family=Josefin+Sans&display=swap');
 
 :root {
   --background: rgb(247, 238, 226);
@@ -11,7 +11,7 @@
   --green: rgba(185, 232, 112, 1);
   --purple: rgba(205, 191, 231, 1);
   --faintpurple: rgba(205, 191, 231, 0.5);
-  --font1: 'Fredericka the Great', 'Purple Purse', cursive;
+  --font1: 'Fredericka the Great', 'Abril Fatface', cursive;
   --font2: 'Josefin Sans', sans-serif;
 }
 

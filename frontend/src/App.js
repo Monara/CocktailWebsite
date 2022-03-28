@@ -1,25 +1,30 @@
+import React, { useState, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { createContext } from "react";
 import Home from './Home';
 import InfoPage from './InfoPage';
 import PageNotFound from  './components/PageNotFound';
 
-export const LanguageContext = createContext("lithuanian");
+export const LanguageContext = createContext();
 
 function App() {
 
+  const [language, setLanguage] = useState("english");
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" exact element={<Home />} /> 
-          <Route path="/lt" exact element={<PageNotFound text="Puslapis kuriamas"/>} />
-          <Route path="/info" exact element={<InfoPage />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    
+    <LanguageContext.Provider value={[language, setLanguage]}>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" exact element={<Home />} /> 
+            <Route path="/info" exact element={<InfoPage />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </LanguageContext.Provider>
+    
   );
 }
 
 export default App;
- /**<Route path="/" element={<PageNotFound text="Page not found"/>} /> */
+ /**The actual context changes happen in Heading component, but the Provider needs to be above the useContext readers*/
