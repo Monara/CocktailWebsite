@@ -99,7 +99,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
                   onSelect={(item) => setTitleValue(item.id)}
                   autoFocus
                   formatResult={ language === "english"? formatResult : formatResultLT}
-                  fuseOptions={language === "english"? {keys: ["id", "title"], minMatchCharLength: 2} : {keys: ["id", "title_lt"], minMatchCharLength: 1}}
+                  fuseOptions={language === "english"? {keys: ["title"]} : {keys: ["title_lt"]}}
                   resultStringKeyName={ language === "english"? "title" : "title_lt" }
                   placeholder={ language === "english"? "By title" : "Pagal pavadinimą"}
                   showIcon={false}
@@ -114,7 +114,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
                   onSelect={(item) => setTagValue(item.id)}
                   autoFocus
                   formatResult={ language === "english"? formatResult : formatResultLT}
-                  fuseOptions={language === "english"? {keys: ["id", "tag_en"], minMatchCharLength: 2} : {keys: ["id", "tag_lt"], minMatchCharLength: 3}}
+                  fuseOptions={language === "english"? {keys: ["tag_en"]} : {keys: ["tag_lt"]}}
                   resultStringKeyName={ language === "english"? "tag_en" : "tag_lt" }
                   placeholder={ language === "english"? "By ingredient" : "Pagal ingredientą"}
                   showIcon={false}
@@ -130,7 +130,9 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
                 </button>
                 {filterVisibility && <Filters />}
               </div>
-              <button id='search-button' onClick={() => props.url(searchClick())}>{ language === "english"? 'Search ' : 'Ieškoti ' }<FontAwesomeIcon icon={faMagnifyingGlass} /></button>     
+              <button id='search-button' onClick={() => {props.url(searchClick()); document.getElementById("results").scrollIntoView({behavior: "smooth", block: "start"});}}>
+                { language === "english"? 'Search ' : 'Ieškoti ' }<FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>     
         </div>    
       </div>
     </>

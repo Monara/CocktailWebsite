@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Abril+Fatface&family=Playfair+Display&family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Abril+Fatface&family=Josefin+Sans&display=swap');
 
 :root {
   --background: rgb(247, 238, 226);
@@ -27,12 +27,15 @@ body {
 h1 {
   font-family: var(--font1);
   font-size: calc(12px + 2.5vw);
-  font-optical-sizing: none;
+  font-weight: normal;
+  text-shadow: 0px 1px var(--almostblack); /*fake bolding, with bold font looks too dark on chrome, edge*/
 }
 
 h2 {
   font-family: var(--font1);
   font-size: calc(12px + 2vw);
+  font-weight: normal;
+  text-shadow: 0px 1px var(--almostblack);
 }
 
 h3 {

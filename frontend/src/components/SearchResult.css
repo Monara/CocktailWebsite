@@ -14,7 +14,7 @@
 }
 
 .text {
-    padding-left: 5%;
+    padding: 0 5%;
 }
 
 div.text > p { /*to not crowd all paragraphs on search results*/
@@ -58,7 +58,22 @@ div.text > p { /*to not crowd all paragraphs on search results*/
     border-bottom: 1px solid var(--almostblack);
   }
 
-  @media only screen and (max-width: 600px), (min-width: 1200px) {
+.react-tabs__tab-panel--selected {
+    animation-name: fade-in;
+    animation-duration: 400ms;
+    animation-timing-function: linear;
+}
+
+@keyframes fade-in {
+    from { 
+        opacity: 0.5; 
+    } 
+    to { 
+        opacity: 1; 
+    } 
+}
+
+@media only screen and (max-width: 600px), (min-width: 1200px) {
     .search-result-container {
         column-gap: 5%;
         width: 80%;
@@ -69,8 +84,7 @@ div.text > p { /*to not crowd all paragraphs on search results*/
         width: 80%;
         margin-left: 10%;
 
-    }
-    
+    }  
 }
 
 @media only screen and (min-width: 1200px) {

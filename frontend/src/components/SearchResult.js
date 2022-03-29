@@ -16,12 +16,13 @@ function SearchResult(props) {
 
   return (
 
-    <>
+<div>
     <Tabs>
         <TabList className='tab-list'>
             <Tab className='tab'>{ language === "english" ? "Ingredients" : "Ingredientai" }</Tab>
             <Tab className='tab'>{ language === "english" ? "Details" : "Detalės" }</Tab>
         </TabList>
+      
         <TabPanel>
         <div className='search-result-container'>
             <img src={img} className='search-result-img' alt='' />
@@ -32,6 +33,7 @@ function SearchResult(props) {
             </div>
         </div>
         </TabPanel>
+
         <TabPanel>
             <div className='search-result-container'>
                 <div className='text'>
@@ -43,8 +45,9 @@ function SearchResult(props) {
                 </div>
             </div>    
         </TabPanel>
+      
     </Tabs>
-    </>
+</div>
   )
 }
 
