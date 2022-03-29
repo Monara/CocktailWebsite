@@ -42,7 +42,7 @@ function Heading() {
             {menuVisibility && <Dropdown />}
             <div className='heading-title'>
                 <div className='heading-text'>
-                { language === "english"? <><h1>The Cocktail Party</h1><p>Classic cocktail recipes</p></> : <><h1>Kokteiliu&#808; vakar<span id="dot">&#729;</span>elis</h1><p>Klasikinių kokteilių receptai</p></>}
+                { language === "english"? <><h1>The Cocktail Party</h1><p>Classic cocktail recipes</p></> : <><h1>Kokteiliu<span id="ogonek">&#808;</span> vakar<span id="overdot">&#729;</span>elis</h1><p>Klasikinių kokteilių receptai</p></>}
                 </div>
                 <img src={img} id='heading-img' alt="" />
             </div>        

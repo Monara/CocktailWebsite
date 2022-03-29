@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Abril+Fatface&family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Abril+Fatface&family=Playfair+Display&family=Josefin+Sans&display=swap');
 
 :root {
   --background: rgb(247, 238, 226);
@@ -11,7 +11,7 @@
   --green: rgba(185, 232, 112, 1);
   --purple: rgba(205, 191, 231, 1);
   --faintpurple: rgba(205, 191, 231, 0.5);
-  --font1: 'Fredericka the Great', 'Abril Fatface', cursive;
+  --font1: 'Fredericka the Great', 'Abril Fatface', serif;
   --font2: 'Josefin Sans', sans-serif;
 }
 
@@ -27,6 +27,7 @@ body {
 h1 {
   font-family: var(--font1);
   font-size: calc(12px + 2.5vw);
+  font-optical-sizing: none;
 }
 
 h2 {
@@ -53,6 +54,15 @@ a {
   color: var(--almostblack);
 }
 
+#ogonek {
+  letter-spacing: -1px; /*otherwise diacritics might be joined onto letters, which fallback on font*/
+}
+
+#overdot {
+  font-size: calc(12px + 2.5vw);
+  letter-spacing: -20px;
+}
+
 @media only screen and (min-width: 1200px) {
 
   body, .small-par {
@@ -73,5 +83,9 @@ a {
 
   button {
     font-size: calc(8px + 0.7vw);
+  }
+
+  #overdot {
+    font-size: calc(12px + 2.2vw);
   }
 }

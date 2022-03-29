@@ -35,7 +35,7 @@ const Filters = () =>
 </div>;
 
 /*Fetch data for autocomplete search*/
-let [autocompleteTitles, setAutocompleteTitle] = useState(""); /**pakeista cia */
+let [autocompleteTitles, setAutocompleteTitle] = useState("");
 let [autocompleteTags, setAutocompleteTag] = useState("");
 
   useEffect(() => {
@@ -91,7 +91,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
     <>
       <div className='color-container'>
         <div className='search-container'>
-        { language === "english"? <h2>Find a cocktail</h2> : <h2>Kokteiliu&#808; paieška</h2> }
+        { language === "english"? <h2>Find a cocktail</h2> : <h2>Kokteiliu<span id="ogonek">&#808;</span> paieška</h2> }
               <form onSubmit={handleSubmit}>
               <div className="input-autocomplete" style={{zIndex: 1}}>
                 <ReactSearchAutocomplete
@@ -99,7 +99,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
                   onSelect={(item) => setTitleValue(item.id)}
                   autoFocus
                   formatResult={ language === "english"? formatResult : formatResultLT}
-                  fuseOptions={{keys: ["id", "title"], minMatchCharLength: 2}}
+                  fuseOptions={language === "english"? {keys: ["id", "title"], minMatchCharLength: 2} : {keys: ["id", "title_lt"], minMatchCharLength: 1}}
                   resultStringKeyName={ language === "english"? "title" : "title_lt" }
                   placeholder={ language === "english"? "By title" : "Pagal pavadinimą"}
                   showIcon={false}
@@ -114,7 +114,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
                   onSelect={(item) => setTagValue(item.id)}
                   autoFocus
                   formatResult={ language === "english"? formatResult : formatResultLT}
-                  fuseOptions={{keys: ["id", "tag_en"], minMatchCharLength: 2}}
+                  fuseOptions={language === "english"? {keys: ["id", "tag_en"], minMatchCharLength: 2} : {keys: ["id", "tag_lt"], minMatchCharLength: 3}}
                   resultStringKeyName={ language === "english"? "tag_en" : "tag_lt" }
                   placeholder={ language === "english"? "By ingredient" : "Pagal ingredientą"}
                   showIcon={false}

@@ -63,11 +63,6 @@
    fill: var(--yellow);
 }
 
-#dot {
-    font-size: calc(12px + 2.3vw);
-    letter-spacing: -28px;
-}
-
 @media only screen and (max-width: 500px) {
     .menu-dropdown {
         width: 13%;
@@ -82,9 +77,5 @@
 
     .menu-dropdown ul {
         font-size: calc(8px + 0.8vw);
-    }
-    
-    #dot {
-        font-size: calc(12px + 2vw);
     }
 }
