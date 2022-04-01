@@ -66,6 +66,13 @@ a {
   letter-spacing: -20px;
 }
 
+@media only screen and (max-width: 500px) {
+  h1, h2 {
+    text-shadow: none; /*shadowing looks blurry on small screen*/
+    font-weight: bold;
+  }
+}
+
 @media only screen and (min-width: 1200px) {
 
   body, .small-par {

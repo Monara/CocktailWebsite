@@ -18,14 +18,28 @@ conn.connect(function(err){
 
 /*functions for autosuggestions */
 app.get('/api/getTitles', (req, res) => {
-	conn.query("SELECT id, title, title_lt FROM cocktail_list", function(error, results) {
+	conn.query("SELECT id, title FROM cocktail_list", function(error, results) {
+		if (error) throw error;
+		res.send(results);
+	});
+});
+
+app.get('/api/getTitlesLT', (req, res) => {
+	conn.query("SELECT id, title_lt FROM cocktail_list", function(error, results) {
 		if (error) throw error;
 		res.send(results);
 	});
 });
 
 app.get('/api/getTags', (req, res) => {
-	conn.query("SELECT id, tag_en, tag_lt FROM cocktail_tags", function(error, results) {
+	conn.query("SELECT id, tag_en FROM cocktail_tags", function(error, results) {
+		if (error) throw error;
+		res.send(results); 
+	});
+});
+
+app.get('/api/getTagsLT', (req, res) => {
+	conn.query("SELECT id, tag_lt FROM cocktail_tags", function(error, results) {
 		if (error) throw error;
 		res.send(results); 
 	});

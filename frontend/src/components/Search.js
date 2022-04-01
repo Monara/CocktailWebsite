@@ -35,8 +35,12 @@ const Filters = () =>
 </div>;
 
 /*Fetch data for autocomplete search*/
+/*ReactSearchAutocomplete picks up on the other language even with fuseOptions 
+*(some LT suggestions shown only when typing the equivalent in EN), thus data separated*/
 let [autocompleteTitles, setAutocompleteTitle] = useState("");
 let [autocompleteTags, setAutocompleteTag] = useState("");
+let [autocompleteTitlesLT, setAutocompleteTitleLT] = useState("");
+let [autocompleteTagsLT, setAutocompleteTagLT] = useState("");
 
   useEffect(() => {
     fetch("/api/getTitles")
@@ -48,6 +52,18 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
     fetch("/api/getTags")
       .then((resp) => resp.json())
       .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/getTitlesLT")
+      .then((res) => res.json())
+      .then((autocompleteTitlesLT) => setAutocompleteTitleLT(autocompleteTitlesLT));
+  }, []);
+
+  useEffect(() => {
+    fetch("/api/getTagsLT")
+      .then((resp) => resp.json())
+      .then((autocompleteTagsLT) => setAutocompleteTagLT(autocompleteTagsLT));
   }, []);
 
   /*Make a URL for search upon clicking button */
@@ -95,7 +111,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
               <form onSubmit={handleSubmit}>
               <div className="input-autocomplete" style={{zIndex: 1}}>
                 <ReactSearchAutocomplete
-                  items={autocompleteTitles}
+                  items={language === "english"? autocompleteTitles : autocompleteTitlesLT}
                   onSelect={(item) => setTitleValue(item.id)}
                   autoFocus
                   formatResult={ language === "english"? formatResult : formatResultLT}
@@ -110,7 +126,7 @@ let [autocompleteTags, setAutocompleteTag] = useState("");
               <div id="empty"></div>
               <div className="input-autocomplete">
                 <ReactSearchAutocomplete
-                  items={autocompleteTags}
+                  items={ language === "english"? autocompleteTags : autocompleteTagsLT}
                   onSelect={(item) => setTagValue(item.id)}
                   autoFocus
                   formatResult={ language === "english"? formatResult : formatResultLT}

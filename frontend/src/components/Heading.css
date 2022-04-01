@@ -43,7 +43,6 @@
 }
 
 .heading-title {
-    /*margin-top: -5%;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -56,6 +55,7 @@
 }
 
 #wave {
+    margin-top: -1px; /*gap on tablet*/
     width: 100%;
 }
 

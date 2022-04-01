@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import InfoPage from './InfoPage';
-import PageNotFound from  './components/PageNotFound';
+/*import PageNotFound from  './components/PageNotFound';*/
 
 export const LanguageContext = createContext();
 
