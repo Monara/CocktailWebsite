@@ -4,17 +4,18 @@ import Heading from './components/Heading';
 import Search from  './components/Search';
 import SearchResult from './components/SearchResult';
 import Footer from  './components/Footer';
-import ScrollUpButton from "react-scroll-up-button";
-import { scrollStyle } from './components/Styles';
-import { LanguageContext } from './App';
+import ScrollUpButton from 'react-scroll-up-button';
+import {scrollStyle} from './components/Styles';
+import {LangContext} from './App';
+import {text} from './components/Text';
 
-function Home() {
+const Home = () => {
 
-  const [language] = useContext(LanguageContext);
-
-  let [url, setUrl] = useState('');
-  let [showRand, setShowRand] = useState(false);
-  let [resultData, setResultData] = useState(null);
+  const [lang] = useContext(LangContext);
+  const [url, setUrl] = useState('');
+  const [showRand, setShowRand] = useState(false);
+  const [resultData, setResultData] = useState(null);
+  const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
 
   useEffect(() => {
     if (url === '') { /*if URL is empty show random */
@@ -36,26 +37,25 @@ function Home() {
   }, [url]); /*[url] means will run again when updated */
 
   return (
-    <div className="Home">
-        <Heading />
-        <Search url={url => setUrl(url)}/>
-        <div id='results'>
-          {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.id}/>) : <p id='no-result'>{ language === "english" ? "No results found" : "Rezultatų nėra"}</p>}
-        </div>
-        <ScrollUpButton 
-          StopPosition={0}
-          ShowAtPosition={300}
-          EasingType='easeOutCubic'
-          AnimationDuration={500}
-          ContainerClassName='ScrollUpButton__Container'
-          TransitionClassName='ScrollUpButton__Toggled'
-          style={scrollStyle}
-          ToggledStyle={{}}
-        />
-        <Footer />
+    <div className='Home'>
+      <Heading />
+      <Search url={url => setUrl(url)}/>
+      <div id='results'>
+        {Array.isArray(resultData) && resultData.length ? resultData.map((item) => <SearchResult data={item} random={showRand} key={item.id}/>) : <p id='no-result'>{text.no_res[i]}</p>}
+      </div>
+      <ScrollUpButton 
+        StopPosition={0}
+        ShowAtPosition={300}
+        EasingType='easeOutCubic'
+        AnimationDuration={500}
+        ContainerClassName='ScrollUpButton__Container'
+        TransitionClassName='ScrollUpButton__Toggled'
+        style={scrollStyle}
+        ToggledStyle={{}}
+      />
+      <Footer />
     </div>
   );
 }
 
-export default Home
-/*unique key to avoid warning*/
+export default Home;

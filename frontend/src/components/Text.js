@@ -1,13 +1,35 @@
 import './Text.css';
 import tools from "../imgs/tools.png";
 
+/*translation object for inserting phrases*/
+export const text = {
+    title: ['The Cocktail Party', 'Kokteilių vakarėlis'],
+    subtitle: ['Classic cocktail recipes', 'Klasikinių kokteilių receptai'],
+    search: ['Search', 'Paieška'],
+    other_lang: ['LT', 'EN'],
+    max3: ['max. 3 ingredients', '3 ingredientai ar mažiau'],
+    veg: ['vegan', 'veganiški'],
+    bytitle: ['By title', 'Pagal pavadinimą'],
+    bytag: ['By ingredient', 'Pagal ingredientą'],
+    less: ['Less', 'Mažiau'],
+    more: ['More', 'Daugiau'],
+    search: ['Search ', 'Ieškoti '],
+    tab1: ['Ingredients', 'Ingredientai'],
+    tab2: ['Details', 'Detalės'],
+    rand: ['Random cocktail:', 'Atsitiktinis kokteilis:'],
+    instr: ['Instructions', 'Gamyba'],
+    glass: ['Glass: ', 'Taurė: '],
+    src: ['Source: ', 'Šaltinis: '],
+    no_res: ['No results found', 'Rezultatų nėra']
+};
+
 export const EngText = () => {
     return (
         <div>
             <div className='section'>
                 <h3>Bar tools</h3>
                 <p>The main tools used in making cocktails are the shaker, bar strainer, jigger, bar spoon, muddler, citrus fruit juicer, and peeler.</p>
-                <img src={tools} id='tools-img' alt="" />
+                <img src={tools} id='tools-img' alt='' />
                 <p><b>Shakers</b> are usually made of stainless steels. Traditionally they consist of three parts. Two-part (Boston) shakers lack a strainer. The bottom part of shakers can be used for cocktails that only require mixing.</p>
                 <p><b>Bar strainers</b> can look like small regular strainers, or like steel spatulas with a metal spiral stretch around the side. Cocktails that include fresh juice usually require straining.</p>
                 <p><b>A jigger</b> is a steel or copper double-sided measuring tool. Typically, one side is twice as big in volume as the other, for instance, 15 ml and 30 ml, 20 ml and 40 ml, and so on.</p>
@@ -56,7 +78,7 @@ export const LtText = () => {
             <div className='section'>
                 <h3>Baro įrankiai</h3>
                 <p>Kokteilių gamybai reikalinga plaktuvė, baro koštuvėlis, menzūrėlė (džigeris), baro šaukštas, grūstuvas (mudleris), rankinė citrusų sulčiaspaudė, skutukas.</p>
-                <img src={tools} id='tools-img' alt="" />
+                <img src={tools} id='tools-img' alt='' />
                 <p><b>Plaktuvės</b> dažnai gaminamos iš nerūdijančio plieno. Jos gali būti trijų arba dviejų  dalių (Bostono). Bostono plaktuvės neturi koštuvėlio, tad jį būtina įsigyti atskirai. Apatinė plaktuvės dalis galima būti naudojama kokteiliams, kuriuos vietoj plakimo tereikia sumaišyti.</p>
                 <p><b>Baro koštuvėliai</b> gali atrodyti ir kaip nedideli standartiniai koštuvai, ir kaip plieninė mentelė, spirale apsuktu kraštu. Kokteiliai su šviežiomis sultimis dažniausiai turi būti perkošti prieš patiekiant.</p>
                 <p><b>Menzūrėlė (džigeris)</b> – tai dvipusis plieninis ar varinis tūrio matuoklis. Paprastai vienos pusės talpa yra dvigubai didesnė nei kitos, pvz., 15 ml ir 30 ml, 20 ml ir 40 ml, ir t.t.</p>

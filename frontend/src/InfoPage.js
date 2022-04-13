@@ -1,21 +1,21 @@
-import React, { useContext } from 'react';
+import React, {useContext} from 'react';
 import './InfoPage.css';
 import Heading from './components/Heading';
 import {EngText, LtText} from './components/Text';
-import Footer from  './components/Footer';
-import ScrollUpButton from "react-scroll-up-button";
-import { scrollStyle } from './components/Styles';
-import { LanguageContext } from './App';
+import Footer from './components/Footer';
+import ScrollUpButton from 'react-scroll-up-button';
+import {scrollStyle} from './components/Styles';
+import {LangContext} from './App';
 
 function InfoPage() {
   
-  const [language] = useContext(LanguageContext);
+  const [lang] = useContext(LangContext);
 
   return (
     <div className='Home'>      
       <Heading />
       <div className='content'>
-        { language === "english" ? <EngText /> : <LtText />}
+        {lang === 'eng' ? <EngText /> : <LtText />}
       </div>
       <ScrollUpButton 
           StopPosition={0}
@@ -29,7 +29,7 @@ function InfoPage() {
         />
       <Footer />
     </div>
-  )
+  );
 }
 
-export default InfoPage
+export default InfoPage;

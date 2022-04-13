@@ -54,7 +54,7 @@ app.get('/api/getRand', (req, res) => {
 });
 
 /*main cocktail search */
-app.get('/api/search', (req, res) => { /*currently works by taking id from user selection so no free user input. Parametrized query better if using user input (cocktail.title, tag_en) */
+app.get('/api/search', (req, res) => { /*currently works by taking id from user selection so no free user input. Parametrized query better if using user input (titles, tags) */
 
 	var cocktail = req.query.cocktail;
 	var tag = req.query.tag;

@@ -60,7 +60,7 @@ div.text > p { /*to not crowd all paragraphs on search results*/
 
 .react-tabs__tab-panel--selected {
     animation-name: fade-in;
-    animation-duration: 400ms;
+    animation-duration: 250ms;
     animation-timing-function: linear;
 }
 

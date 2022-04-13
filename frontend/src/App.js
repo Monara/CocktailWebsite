@@ -1,28 +1,26 @@
-import React, { useState, createContext } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, {useState, createContext} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Home from './Home';
 import InfoPage from './InfoPage';
-/*import PageNotFound from  './components/PageNotFound';*/
+/*import PageNotFound from './components/PageNotFound';*/
 
-export const LanguageContext = createContext();
+export const LangContext = createContext();
 
-function App() {
+const App = () => {
 
-  const [language, setLanguage] = useState("english");
+  const [lang, setLang] = useState('eng');
 
   return (
-    
-    <LanguageContext.Provider value={[language, setLanguage]}>
-      <div className="App">
+    <LangContext.Provider value={[lang, setLang]}>
+      <div className='App'>
         <BrowserRouter>
           <Routes>
-            <Route path="/" exact element={<Home />} /> 
-            <Route path="/info" exact element={<InfoPage />} />
+            <Route path='/' exact element={<Home />} /> 
+            <Route path='/info' exact element={<InfoPage />} />
           </Routes>
         </BrowserRouter>
       </div>
-    </LanguageContext.Provider>
-    
+    </LangContext.Provider>
   );
 }
 

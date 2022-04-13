@@ -1,79 +1,78 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext} from 'react';
 import './Search.css';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronUp, faChevronDown, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { faSquare, faSquareCheck } from '@fortawesome/free-regular-svg-icons';
-import { inputStyle } from './Styles';
-import { LanguageContext } from '../App';
+import {ReactSearchAutocomplete} from 'react-search-autocomplete';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faChevronUp, faChevronDown, faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
+import {faSquare, faSquareCheck} from '@fortawesome/free-regular-svg-icons';
+import {inputStyle} from './Styles';
+import {LangContext} from '../App';
+import {text} from './Text';
 
-function Search(props) {
+const Search = (props) => {
 
 /*Language chosen */
-const [language] = useContext(LanguageContext);
+const [lang] = useContext(LangContext);
 /*States */
 const [filterVisibility, setFilterVisibility] = useState(false);
-const [titleValue, setTitleValue] = useState("");
-const [tagValue, setTagValue] = useState("");
+const [titleValue, setTitleValue] = useState('');
+const [tagValue, setTagValue] = useState('');
 const [checkbox1Marked, markCheckbox1] = useState(false);
 const [checkbox2Marked, markCheckbox2] = useState(false);
 
+const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
+
 /*Checkboxes for filtering */
 const Filters = () =>
-
-<div className='filter-container'>
-    <label>
-        <input type="checkbox" onClick={() => { markCheckbox1(!checkbox1Marked)}} />
-        {checkbox1Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;
-        { language === "english"? 'max. 3 ingredients' : '3 ingredientai ar mažiau' } 
-    </label>
-    <label>
-        <input type="checkbox" onClick={() => {markCheckbox2(!checkbox2Marked)}} />
-        {checkbox2Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;
-        { language === "english"? 'vegan' : 'veganiški' } 
-    </label>
-</div>;
+  <div className='filter-container'>
+      <label>
+          <input type='checkbox' onClick={() => {markCheckbox1(!checkbox1Marked)}} />
+          {checkbox1Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;{text.max3[i]} 
+      </label>
+      <label>
+          <input type='checkbox' onClick={() => {markCheckbox2(!checkbox2Marked)}} />
+          {checkbox2Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;{text.veg[i]} 
+      </label>
+  </div>;
 
 /*Fetch data for autocomplete search*/
 /*ReactSearchAutocomplete picks up on the other language even with fuseOptions 
 *(some LT suggestions shown only when typing the equivalent in EN), thus data separated*/
-let [autocompleteTitles, setAutocompleteTitle] = useState("");
-let [autocompleteTags, setAutocompleteTag] = useState("");
-let [autocompleteTitlesLT, setAutocompleteTitleLT] = useState("");
-let [autocompleteTagsLT, setAutocompleteTagLT] = useState("");
+const [autocompleteTitles, setAutocompleteTitle] = useState('');
+const [autocompleteTags, setAutocompleteTag] = useState('');
+const [autocompleteTitlesLT, setAutocompleteTitleLT] = useState('');
+const [autocompleteTagsLT, setAutocompleteTagLT] = useState('');
 
   useEffect(() => {
-    fetch("/api/getTitles")
+    fetch('/api/getTitles')
       .then((res) => res.json())
       .then((autocompleteTitles) => setAutocompleteTitle(autocompleteTitles));
   }, []);
 
   useEffect(() => {
-    fetch("/api/getTags")
+    fetch('/api/getTags')
       .then((resp) => resp.json())
       .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
   }, []);
 
   useEffect(() => {
-    fetch("/api/getTitlesLT")
+    fetch('/api/getTitlesLT')
       .then((res) => res.json())
       .then((autocompleteTitlesLT) => setAutocompleteTitleLT(autocompleteTitlesLT));
   }, []);
 
   useEffect(() => {
-    fetch("/api/getTagsLT")
+    fetch('/api/getTagsLT')
       .then((resp) => resp.json())
       .then((autocompleteTagsLT) => setAutocompleteTagLT(autocompleteTagsLT));
   }, []);
 
   /*Make a URL for search upon clicking button */
-  function searchClick() {
-
-    let url = new URL("https://example.com/api/search");
-    if (titleValue !== "") {
+  const searchClick = () => {
+    const url = new URL('https://example.com/api/search');
+    if (titleValue !== '') {
       url.searchParams.append('cocktail', titleValue);
     }
-    if (tagValue !== "") {
+    if (tagValue !== '') {
       url.searchParams.append('tag', tagValue);
     }
     if (checkbox1Marked === true) {
@@ -85,17 +84,11 @@ let [autocompleteTagsLT, setAutocompleteTagLT] = useState("");
     return url.toString().substring(19);
   }
 
-  /*format autosuggestions */
+  /*format autosuggestions for both languages*/
   const formatResult = (item) => {
     return (
-        <span style={{ display: 'block', textAlign: 'left' }}>{item.title ? item.title : item.tag_en}</span>
-    )
-  }
-
-  const formatResultLT = (item) => {
-    return (
-        <span style={{ display: 'block', textAlign: 'left' }}>{item.title_lt ? item.title_lt : item.tag_lt}</span>
-    )
+      <span style={{display: 'block', textAlign: 'left'}}>{lang === 'eng'? (item.title ? item.title : item.tag_en) : (item.title_lt ? item.title_lt : item.tag_lt)}</span>
+    );
   }
 
   const handleSubmit = (e) => { /*Form used for ENTER key to work. Two inputs need a button within a form, included a dummy button. Including filters within form toggles their visibility. */
@@ -107,47 +100,47 @@ let [autocompleteTagsLT, setAutocompleteTagLT] = useState("");
     <>
       <div className='color-container'>
         <div className='search-container'>
-        { language === "english"? <h2>Find a cocktail</h2> : <h2>Kokteiliu<span id="ogonek">&#808;</span> paieška</h2> }
+        {lang === 'eng'? <h2>Find a cocktail</h2> : <h2>Kokteiliu<span id='ogonek'>&#808;</span> paieška</h2>}
               <form onSubmit={handleSubmit}>
-              <div className="input-autocomplete" style={{zIndex: 1}}>
+              <div className='input-autocomplete' style={{zIndex: 1}}>
                 <ReactSearchAutocomplete
-                  items={language === "english"? autocompleteTitles : autocompleteTitlesLT}
+                  items={lang === 'eng'? autocompleteTitles : autocompleteTitlesLT}
                   onSelect={(item) => setTitleValue(item.id)}
                   autoFocus
-                  formatResult={ language === "english"? formatResult : formatResultLT}
-                  fuseOptions={language === "english"? {keys: ["title"]} : {keys: ["title_lt"]}}
-                  resultStringKeyName={ language === "english"? "title" : "title_lt" }
-                  placeholder={ language === "english"? "By title" : "Pagal pavadinimą"}
+                  formatResult={formatResult}
+                  fuseOptions={lang === 'eng'? {keys: ['title']} : {keys: ['title_lt']}}
+                  resultStringKeyName={lang === 'eng'? 'title' : 'title_lt'}
+                  placeholder={text.bytitle[i]}
                   showIcon={false}
-                  onClear={() => setTitleValue("")}
+                  onClear={() => setTitleValue('')}
                   styling={inputStyle}
                 /> 
               </div>
-              <div id="empty"></div>
-              <div className="input-autocomplete">
+              <div id='empty'></div>
+              <div className='input-autocomplete'>
                 <ReactSearchAutocomplete
-                  items={ language === "english"? autocompleteTags : autocompleteTagsLT}
+                  items={lang === 'eng'? autocompleteTags : autocompleteTagsLT}
                   onSelect={(item) => setTagValue(item.id)}
                   autoFocus
-                  formatResult={ language === "english"? formatResult : formatResultLT}
-                  fuseOptions={language === "english"? {keys: ["tag_en"]} : {keys: ["tag_lt"]}}
-                  resultStringKeyName={ language === "english"? "tag_en" : "tag_lt" }
-                  placeholder={ language === "english"? "By ingredient" : "Pagal ingredientą"}
+                  formatResult={formatResult}
+                  fuseOptions={lang === 'eng'? {keys: ['tag_en']} : {keys: ['tag_lt']}}
+                  resultStringKeyName={lang === 'eng'? 'tag_en' : 'tag_lt'}
+                  placeholder={text.bytag[i]}
                   showIcon={false}
-                  onClear={() => setTagValue("")}
+                  onClear={() => setTagValue('')}
                   styling={inputStyle}
                 />
               </div>
-              <button style={{display:"none"}}></button>
+              <button style={{display:'none'}}></button>
               </form> 
               <div className='filters'>
-                <button id='filter-button' onClick={() => {setFilterVisibility(!filterVisibility) }}>{ language === "english"? <>{filterVisibility ? "Less" : "More"}</> : <>{filterVisibility ? "Mažiau" : "Daugiau"}</> }&nbsp;
-                  {filterVisibility ? <FontAwesomeIcon icon={faChevronUp} /> : <FontAwesomeIcon icon={faChevronDown} />}
+                <button id='filter-button' onClick={() => {setFilterVisibility(!filterVisibility) }}>
+                  {filterVisibility ? <>{text.less[i]}&nbsp;<FontAwesomeIcon icon={faChevronUp} /></> : <>{text.more[i]}&nbsp;<FontAwesomeIcon icon={faChevronDown} /></>}
                 </button>
                 {filterVisibility && <Filters />}
               </div>
-              <button id='search-button' onClick={() => {props.url(searchClick()); document.getElementById("results").scrollIntoView({behavior: "smooth", block: "start"});}}>
-                { language === "english"? 'Search ' : 'Ieškoti ' }<FontAwesomeIcon icon={faMagnifyingGlass} />
+              <button id='search-button' onClick={() => {props.url(searchClick()); document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});}}>
+                {text.search[i]}<FontAwesomeIcon icon={faMagnifyingGlass} />
               </button>     
         </div>    
       </div>
@@ -155,4 +148,4 @@ let [autocompleteTagsLT, setAutocompleteTagLT] = useState("");
   )
 }
 
-export default Search
+export default Search;
