@@ -1,4 +1,4 @@
-/**Needs refactoring */
+/**Needs more refactoring */
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
@@ -18,36 +18,20 @@ conn.connect(function(err){
 });
 
 /*functions for autosuggestions */
-app.get('/api/getTitles', (req, res) => {
-	conn.query("SELECT id, title FROM cocktail_list", function(error, results) {
+const getAutocompleteResults = (res, column, table) => {
+	conn.query(`SELECT id, ${column} FROM ${table}`, function(error, results) {
 		if (error) throw error;
 		res.send(results);
 	});
-});
+}
 
-app.get('/api/getTitlesLT', (req, res) => {
-	conn.query("SELECT id, title_lt FROM cocktail_list", function(error, results) {
-		if (error) throw error;
-		res.send(results);
-	});
-});
-
-app.get('/api/getTags', (req, res) => {
-	conn.query("SELECT id, tag_en FROM cocktail_tags", function(error, results) {
-		if (error) throw error;
-		res.send(results); 
-	});
-});
-
-app.get('/api/getTagsLT', (req, res) => {
-	conn.query("SELECT id, tag_lt FROM cocktail_tags", function(error, results) {
-		if (error) throw error;
-		res.send(results); 
-	});
-});
+app.get('/api/getTitles', (_, res) => getAutocompleteResults(res, "title", "cocktail_list"));
+app.get('/api/getTitlesLT', (_, res) => getAutocompleteResults(res, "title_lt", "cocktail_list"));
+app.get('/api/getTags', (_, res) => getAutocompleteResults(res, "tag_en", "cocktail_tags"));
+app.get('/api/getTagsLT', (_, res) => getAutocompleteResults(res, "tag_lt", "cocktail_tags"));
 
 /*get random cocktail so page isn't empty*/
-app.get('/api/getRand', (req, res) => {
+app.get('/api/getRand', (_, res) => {
 	conn.query("SELECT * FROM cocktail_list ORDER BY RAND() LIMIT 1", function(error, results) {
 		if (error) throw error;
 		res.send(results); 
