@@ -8,7 +8,38 @@ import {inputStyle} from './Styles';
 import {LangContext} from '../App';
 import {text} from './Text';
 
-const Search = (props) => {
+/*Checkboxes for filtering */
+const Filters = ({checkboxState: [checkboxes, setCheckboxes]}) => {
+
+  const [lang] = useContext(LangContext);
+  const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
+
+  const markCheckbox1 = () => {
+    const mark1 = {...checkboxes, first: !checkboxes.first}; /**spread operator, overwrite first to be toggled */
+    setCheckboxes(mark1);
+  }
+
+  const markCheckbox2 = () => {
+    const mark2 = {...checkboxes, second: !checkboxes.second};
+    setCheckboxes(mark2);
+  }
+
+  return (
+    <div className='filter-container'>
+        <label>
+            <input type='checkbox' onClick={markCheckbox1} />
+            {checkboxes.first ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;{text.max3[i]} 
+        </label>
+        <label>
+            <input type='checkbox' onClick={markCheckbox2} />
+            {checkboxes.second ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;{text.veg[i]} 
+        </label>
+    </div>
+  );
+} 
+
+
+const Search = ({url}) => {
 
 /*Language chosen */
 const [lang] = useContext(LangContext);
@@ -16,23 +47,10 @@ const [lang] = useContext(LangContext);
 const [filterVisibility, setFilterVisibility] = useState(false);
 const [titleValue, setTitleValue] = useState('');
 const [tagValue, setTagValue] = useState('');
-const [checkbox1Marked, markCheckbox1] = useState(false);
-const [checkbox2Marked, markCheckbox2] = useState(false);
-
+const [checkboxes, setCheckboxes] = useState({first:false, second:false}); /*object for state */
 const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
 
-/*Checkboxes for filtering */
-const Filters = () =>
-  <div className='filter-container'>
-      <label>
-          <input type='checkbox' onClick={() => {markCheckbox1(!checkbox1Marked)}} />
-          {checkbox1Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;{text.max3[i]} 
-      </label>
-      <label>
-          <input type='checkbox' onClick={() => {markCheckbox2(!checkbox2Marked)}} />
-          {checkbox2Marked ? <FontAwesomeIcon icon={faSquareCheck} /> : <FontAwesomeIcon icon={faSquare} />}&nbsp;{text.veg[i]} 
-      </label>
-  </div>;
+
 
 /*Fetch data for autocomplete search*/
 /*ReactSearchAutocomplete picks up on the other language even with fuseOptions 
@@ -75,10 +93,10 @@ const [autocompleteTagsLT, setAutocompleteTagLT] = useState('');
     if (tagValue !== '') {
       url.searchParams.append('tag', tagValue);
     }
-    if (checkbox1Marked === true) {
+    if (checkboxes.first) {
       url.searchParams.append('short', 'true');
     }
-    if (checkbox2Marked === true) {
+    if (checkboxes.second) {
       url.searchParams.append('vegan', 'true');
     }
     return url.toString().substring(19);
@@ -93,7 +111,7 @@ const [autocompleteTagsLT, setAutocompleteTagLT] = useState('');
 
   const handleSubmit = (e) => { /*Form used for ENTER key to work. Two inputs need a button within a form, included a dummy button. Including filters within form toggles their visibility. */
     e.preventDefault();
-    props.url(searchClick());
+    url(searchClick());
   };
 
   return (
@@ -137,10 +155,10 @@ const [autocompleteTagsLT, setAutocompleteTagLT] = useState('');
                 <button id='filter-button' onClick={() => {setFilterVisibility(!filterVisibility) }}>
                   {filterVisibility ? <>{text.less[i]}&nbsp;<FontAwesomeIcon icon={faChevronUp} /></> : <>{text.more[i]}&nbsp;<FontAwesomeIcon icon={faChevronDown} /></>}
                 </button>
-                {filterVisibility && <Filters />}
+                {filterVisibility && <Filters checkboxState={[checkboxes, setCheckboxes]}/>}
               </div>
-              <button id='search-button' onClick={() => {props.url(searchClick()); document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});}}>
-                {text.search[i]}<FontAwesomeIcon icon={faMagnifyingGlass} />
+              <button id='search-button' onClick={() => {url(searchClick()); document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});}}>
+                {text.search2[i]}<FontAwesomeIcon icon={faMagnifyingGlass} />
               </button>     
         </div>    
       </div>

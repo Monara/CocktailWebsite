@@ -56,12 +56,11 @@ app.get('/api/getRand', (req, res) => {
 /*main cocktail search */
 app.get('/api/search', (req, res) => { /*currently works by taking id from user selection so no free user input. Parametrized query better if using user input (titles, tags) */
 
-	var cocktail = req.query.cocktail;
-	var tag = req.query.tag;
-	var vegan = req.query.vegan;
-	var short = req.query.short;
-
-	var statement = "SELECT * FROM cocktail_list";
+	const cocktail = req.query.cocktail;
+	const tag = req.query.tag;
+	const vegan = req.query.vegan;
+	const short = req.query.short;
+	const statement = "SELECT * FROM cocktail_list";
 
 	if (cocktail != null) {
 		 /*if searching by title, ignore other parameters */

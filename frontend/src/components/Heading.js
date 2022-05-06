@@ -7,31 +7,38 @@ import {faBars, faClose} from '@fortawesome/free-solid-svg-icons';
 import {LangContext} from '../App';
 import {text} from './Text';
 
-const Heading = () => {
+
+const Dropdown = ({handleClick}) => {
 
     const [lang, setLang] = useContext(LangContext);
-    const [menuVisibility, setMenuVisibility] = useState(false);
+    const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
 
+    return (
+        <div className='menu-dropdown'>
+        <ul>
+            <Link to='' onClick={() => {lang === 'eng'? setLang('lt') : setLang('eng'); handleClick()}}>
+                <li>{text.other_lang[i]}</li>
+            </Link>
+            <Link to='/' onClick={handleClick}>
+                <li>{text.search[i]}</li>
+            </Link>
+            <Link to='/info' onClick={handleClick}>
+                <li>Info</li>
+            </Link>
+        </ul>
+        </div>
+    );
+}    
+
+const Heading = () => {
+
+    const [lang] = useContext(LangContext);
+    const [menuVisibility, setMenuVisibility] = useState(false);
+    const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
+    
     const menuClick = () => {
         setMenuVisibility(!menuVisibility);
     }
-
-    const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
-
-    const Dropdown = () =>  
-        <div className='menu-dropdown'>
-            <ul>
-                <Link to='' onClick={() => {lang === 'eng'? setLang('lt') : setLang('eng'); menuClick()}}>
-                    <li>{text.other_lang[i]}</li>
-                </Link>
-                <Link to='/' onClick={menuClick}>
-                    <li>{text.search[i]}</li>
-                </Link>
-                <Link to='/info' onClick={menuClick}>
-                    <li>Info</li>
-                </Link>
-            </ul>
-        </div>;
 
   return (
     <div>
@@ -40,10 +47,10 @@ const Heading = () => {
             <button id='menu-button' onClick={menuClick} >
             {menuVisibility ? <FontAwesomeIcon className='menu-icon' icon={faClose} /> : <FontAwesomeIcon className='menu-icon' icon={faBars} />}
             </button>
-            {menuVisibility && <Dropdown />}
+            {menuVisibility && <Dropdown handleClick={menuClick} />}
             <div className='heading-title'>
                 <div className='heading-text'>
-                {lang === 'eng'? <h1>The Cocktail Party</h1> : <h1>Kokteiliu<span id="ogonek">&#808;</span> vakar<span id="overdot">&#729;</span>elis</h1>}
+                {lang === 'eng'? <h1>The Cocktail Party</h1> : <h1>Kokteiliu<span id="ogonek">&#808;</span> vakar<span id="overdot">&#729;</span>elis</h1>} {/*not from Text.js due to diacritics... */}
                 <p>{text.subtitle[i]}</p>
                 </div>
                 <img src={img} id='heading-img' alt='' />

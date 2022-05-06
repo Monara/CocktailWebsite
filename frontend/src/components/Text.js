@@ -13,7 +13,7 @@ export const text = {
     bytag: ['By ingredient', 'Pagal ingredientą'],
     less: ['Less', 'Mažiau'],
     more: ['More', 'Daugiau'],
-    search: ['Search ', 'Ieškoti '],
+    search2: ['Search ', 'Ieškoti '],
     tab1: ['Ingredients', 'Ingredientai'],
     tab2: ['Details', 'Detalės'],
     rand: ['Random cocktail:', 'Atsitiktinis kokteilis:'],
