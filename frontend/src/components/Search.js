@@ -40,7 +40,6 @@ const Filters = ({checkboxState: [checkboxes, setCheckboxes]}) => {
 
 
 const Search = ({url}) => {
-
 /*Language chosen */
 const [lang] = useContext(LangContext);
 /*States */
@@ -50,8 +49,6 @@ const [tagValue, setTagValue] = useState('');
 const [checkboxes, setCheckboxes] = useState({first:false, second:false}); /*object for state */
 const i = (lang === 'eng' ? 0 : 1); /*index for translations in text object arrays*/
 
-
-
 /*Fetch data for autocomplete search*/
 /*ReactSearchAutocomplete picks up on the other language even with fuseOptions 
 *(some LT suggestions shown only when typing the equivalent in EN), thus data separated*/
@@ -60,29 +57,27 @@ const [autocompleteTags, setAutocompleteTag] = useState('');
 const [autocompleteTitlesLT, setAutocompleteTitleLT] = useState('');
 const [autocompleteTagsLT, setAutocompleteTagLT] = useState('');
 
-  useEffect(() => {
-    fetch('/api/getTitles')
-      .then((res) => res.json())
-      .then((autocompleteTitles) => setAutocompleteTitle(autocompleteTitles));
-  }, []);
+const handleError = (response) => {
+  if (!response.ok) {
+    throw new Error(`HTTP error ${response.status} ${response.statusText}`);
+  } 
+  return response;
+}
 
-  useEffect(() => {
-    fetch('/api/getTags')
-      .then((resp) => resp.json())
-      .then((autocompleteTags) => setAutocompleteTag(autocompleteTags));
-  }, []);
+const fetchData = (fetchURL, setData) => {
+  fetch(fetchURL) /**check response status with fetch()!  */
+    .then(handleError)
+    .then(response => response.json())
+    .then(data => setData(data))
+    .catch(error => console.log(error)) /**blocked URL for instance */
+}
 
-  useEffect(() => {
-    fetch('/api/getTitlesLT')
-      .then((res) => res.json())
-      .then((autocompleteTitlesLT) => setAutocompleteTitleLT(autocompleteTitlesLT));
-  }, []);
-
-  useEffect(() => {
-    fetch('/api/getTagsLT')
-      .then((resp) => resp.json())
-      .then((autocompleteTagsLT) => setAutocompleteTagLT(autocompleteTagsLT));
-  }, []);
+useEffect(() => {
+  fetchData('/api/getTitles', setAutocompleteTitle);
+  fetchData('/api/getTags', setAutocompleteTag);
+  fetchData('/api/getTitlesLT', setAutocompleteTitleLT);
+  fetchData('/api/getTagsLT', setAutocompleteTagLT);
+}, []); /**get all data once for autocomplete search*/
 
   /*Make a URL for search upon clicking button */
   const searchClick = () => {
@@ -112,6 +107,7 @@ const [autocompleteTagsLT, setAutocompleteTagLT] = useState('');
   const handleSubmit = (e) => { /*Form used for ENTER key to work. Two inputs need a button within a form, included a dummy button. Including filters within form toggles their visibility. */
     e.preventDefault();
     url(searchClick());
+    document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
   };
 
   return (

@@ -1,3 +1,4 @@
+/**Needs refactoring */
 const mysql = require('mysql');
 const express = require('express');
 const app = express();
@@ -60,7 +61,7 @@ app.get('/api/search', (req, res) => { /*currently works by taking id from user 
 	const tag = req.query.tag;
 	const vegan = req.query.vegan;
 	const short = req.query.short;
-	const statement = "SELECT * FROM cocktail_list";
+	const query = "SELECT * FROM cocktail_list";
 
 	if (cocktail != null) {
 		 /*if searching by title, ignore other parameters */
@@ -88,9 +89,9 @@ app.get('/api/search', (req, res) => { /*currently works by taking id from user 
 	
 	else if (vegan != null || short != null) {
 
-		if (vegan != null && short != null) { statement += " WHERE cocktail_list.vegan=1 AND cocktail_list.ingredient_count <= 3"}
-		else if (vegan != null) {statement += " WHERE cocktail_list.vegan=1"}
-		else if (short != null) { statement += " WHERE cocktail_list.ingredient_count <= 3"}
+		if (vegan != null && short != null) { query += " WHERE cocktail_list.vegan=1 AND cocktail_list.ingredient_count <= 3"}
+		else if (vegan != null) { query += " WHERE cocktail_list.vegan=1"}
+		else if (short != null) { query += " WHERE cocktail_list.ingredient_count <= 3"}
 
 		conn.query(statement, function(error, results) {
 			if (error) throw error;
